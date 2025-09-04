@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome | Kingdom Civilization Embassy{% endblock %}
+
+{% block content %}
+    <section class="hero responsive-hero-bg" data-fallback-bg="{% static 'img/pstansere.jpg' %}">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="welcome-badge">
+                    <i class="fas fa-heart"></i>
+                    <span>Welcome To Our Family</span>
+                </div>
+                <div class="hero-text">
+                    <h4>Welcome To</h4>
+                    <h1>WARRIOR BRIDE WORLDWIDE MINISTRY</h1>
+                    <h5>Kingdom Civilization Embassy (KCE)</h5>
+                    <h6>We are a Commission dedicated to Raising a Supernatural Army of Young People to Take Captive Their Generation for God</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Upcoming Events</h2>
+                <p>Join us for these exciting opportunities to grow in faith and fellowship</p>
+            </div>
+            <div class="grid grid-3 mt-3">
+                <div class="card event-card fade-in">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">JUN</span>
+                    </div>
+                    <h3>Founder's Day</h3>
+                    <p>Join us as we celebrate our man of God, Pastor Francis Ansere</p>
+                    <div class="event-location">
+                        <i class="fas fa-clock"></i>
+                        <span>9:00 AM</span>
+                    </div>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>MCWV+F43, Kumasi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'events' %}" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt"></i>
+                    View All Events
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-soft">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Latest Sermons</h2>
+                <p>Discover powerful teachings that will transform your spiritual journey</p>
+            </div>
+            <div class="grid grid-3 mt-3">
+                <div class="card sermon-card fade-in">
+                    <img src="{% static 'img/year_of_dominion.jpg' %}" alt="Let Them Have Dominion 5" class="sermon-thumbnail">
+                    <h3>Let Them Have Dominion 5!</h3>
+                    <h6>(The Genesis 2 Mandate - PART 3)</h6>
+                    <div class="sermon-meta">
+                        <span><i class="fas fa-microphone"></i> Voice Of The Teaching Priest Broadcast</span>
+                    </div>
+                    <div class="sermon-meta">
+                        <span><i class="fas fa-calendar"></i> May 31, 2025</span>
+                    </div>
+                    <a href="https://www.instagram.com/reel/DJ6U2WBt7aw/?utm_source=ig_web_copy_link" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        Watch Now
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'sermons' %}" class="btn btn-soft">
+                    <i class="fas fa-video"></i>
+                    View All Sermons
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Words of Wisdom</h2>
+                <p>Be inspired by powerful teachings from our spiritual leader</p>
+            </div>
+            <div class="quote-card fade-in">
+                <p class="quote-text">"God gave Adam a niche (garden), and from there he was suppose to rule over the entire world. So every human being must have that garden."</p>
+                <div class="quote-meta">
+                    <div class="quote-reference">Genesis 1:28</div>
+                    <p><i class="fas fa-quote-left"></i> From the sermon 'Let Them Have Dominion'</p>
+                    <div class="quote-author">Pastor Francis Ansere</div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'quotes' %}" class="btn btn-soft">
+                    <i class="fas fa-heart"></i>
+                    View More Quotes
+                </a>
+            </div>
+        </div>
+    </section>
+
+   <section class="section subscription-section">
+      <div class="container">
+         <div class="subscription-content fade-in">
+            <h2 class="text-center">Stay Connected With Our Family</h2>
+               <p class="text-center">Join our community and receive updates about our upcoming events, sermons, and spiritual growth opportunities</p>
+                
+               <div class="form-success" style="display: none;">
+                  <i class="fas fa-check-circle"></i>
+                  <p>Welcome to our family! You'll receive updates about our events and sermons.</p>
+               </div>
+
+               <div class="form-error" style="display: none;">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <p>There was an error processing your subscription. Please try again.</p>
+               </div>
+
+               <form id="subscriptionForm" class="subscription-form">
+                     method="post"
+                     action="{% url 'members:subscribe' %}"
+                  {% csrf_token %}
+                  <div class="form-group">
+                     <label for="subscriberName">
+                        <i class="fas fa-user"></i> Full Name
+                     </label>
+                     <input type="text" id="subscriberName" class="form-control" placeholder="Enter your full name" required>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Number
+                     </label>
+                     <input type="tel" id="whatsapp" class="form-control" placeholder="e.g., +233 54 630 4940" required>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="subscriberEmail">
+                        <i class="fas fa-envelope"></i> Email Address
+                     </label>
+                     <input type="email" id="subscriberEmail" class="form-control" placeholder="Enter your email address" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">
+                     <i class="fas fa-paper-plane"></i> Join Our Family
+                  </button>
+               </form>
+         </div>
+      </div>
+   </section>
+
+   <section class="section cta-section">
+      <div class="container">
+         <div class="cta-content fade-in">
+            <h2>🤗 Join Our Growing Community</h2>
+            <p>Be part of a vibrant family of believers growing in faith, love, and purpose together.</p>
+            <div class="cta-buttons">
+                  <a href="{% url 'contact' %}" class="btn">
+                     <i class="fas fa-comments"></i>
+                     Let's Connect
+                  </a>
+                  <a href="pages/give.html" class="btn btn-primary">
+                     <i class="fas fa-heart"></i>
+                     Support Our Ministry
+                  </a>
+            </div>
+         </div>
+      </div>
+   </section>
+{% endblock %}
+
+{% block scripts_extra %}
+   <script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

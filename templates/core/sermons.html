@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'css/sermons.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="sermons-header">
+        <div class="container">
+            <h1 class="text-center">Our Sermons</h1>
+            <p class="text-center">Raising A Supernatural Army To Take Captive Their Generation for God</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="sermons-filters">
+            <h3>Filter Sermons</h3>
+            <div class="filter-group">
+                <input type="text" id="searchInput" class="filter-input" placeholder="Search sermons...">
+                <select id="speakerFilter" class="filter-input">
+                    <option value="">All Speakers</option>
+                    {% for speaker in speakers %}
+                        <option value="{{ speaker }}">{{ speaker }}</option>
+                    {% endfor %}
+                </select>
+                <select id="categoryFilter" class="filter-input">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+                <select id="dateFilter" class="filter-input">
+                    <option value="">Sort by Date</option>
+                    <option value="latest">Latest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+            <div class="tags-filter">
+                <h4>Filter by Tags</h4>
+                <div id="tagsContainer" class="tags-container">
+                    {% for tag in all_tags %}
+                        <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="sermons-grid grid grid-3" id="sermonsGrid">
+            {% if sermons %}
+                {% for sermon in sermons %}
+                    <div class="card sermon-card" data-preview-url="{{ sermon.previewVideoUrl }}">
+                        <div class="sermon-thumbnail">
+                            <img src="{{ sermon.thumbnail }}" alt="{{ sermon.title }}" loading="lazy">
+                            <div class="sermon-play">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="sermon-info">
+                            <h3>{{ sermon.title }}</h3>
+                            <div class="sermon-meta">
+                                <p><i class="fas fa-user"></i> {{ sermon.speaker }}</p>
+                                <p><i class="fas fa-calendar"></i> {{ sermon.date|date:"F j, Y" }}</p>
+                                <p><i class="fas fa-folder"></i> {{ sermon.category }}</p>
+                            </div>
+                            {% if sermon.tags %}
+                                <div class="sermon-tags">
+                                    {% for tag in sermon.tags %}
+                                        <span class="sermon-tag">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="sermon-actions">
+                                <a href="{{ sermon.fullVideoUrl }}" class="btn" target="_blank">
+                                    <i class="fas fa-play-circle"></i> Watch Full Sermon
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-sermons">
+                    <i class="fas fa-search"></i>
+                    <p>No sermons found matching your criteria.</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container">
+                <iframe id="videoFrame" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_extra %}
+    <script src="{% static 'js/sermons.js' %}"></script>
+{% endblock %}

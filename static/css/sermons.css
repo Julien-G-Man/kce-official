@@ -1,0 +1,252 @@
+/* All the CSS from the previous response goes here. No changes needed. */
+/* Header section styles with gradient background */
+.sermons-header {
+    background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: calc(64px + var(--spacing-xl)) 0 var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Typography styles for header */
+.sermons-header h1, .sermons-header p {
+    font-family: 'Georgia', serif;
+}
+
+/* Sermon filters container styles */
+.sermons-filters {
+    background: var(--surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Filter controls container styles */
+.filter-group {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Filter input field styles */
+.filter-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--text-secondary);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    min-width: 200px;
+}
+
+/* Sermon card container styles */
+.sermon-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* Sermon thumbnail container styles */
+.sermon-thumbnail {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    aspect-ratio: 16/9;
+}
+
+/* Sermon thumbnail image styles */
+.sermon-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+/* Sermon thumbnail hover effect */
+.sermon-card:hover .sermon-thumbnail img {
+    transform: scale(1.05);
+}
+
+/* Play button overlay styles */
+.sermon-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+/* Play button hover effect */
+.sermon-card:hover .sermon-play {
+    opacity: 1;
+}
+
+/* Play button icon styles */
+.sermon-play i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* Sermon information container styles */
+.sermon-info {
+    padding: var(--spacing-md);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sermon metadata styles */
+.sermon-meta {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Sermon metadata icon styles */
+.sermon-meta i {
+    margin-right: var(--spacing-xs);
+}
+
+/* Sermon action buttons container styles */
+.sermon-actions {
+    margin-top: auto;
+    padding-top: var(--spacing-md);
+}
+
+/* Loading indicator styles */
+.loading {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+/* Loading spinner animation */
+.loading i {
+    font-size: 2rem;
+    animation: spin 1s linear infinite;
+}
+
+/* Loading spinner keyframes */
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* No sermons message styles */
+.no-sermons {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+/* Tags filter container styles */
+.tags-filter {
+    margin-top: var(--spacing-md);
+}
+
+/* Tags container styles */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+/* Individual tag styles */
+.tag {
+    background: var(--background);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 1px solid var(--text-secondary);
+}
+
+/* Tag hover effect */
+.tag:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Active tag styles */
+.tag.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Sermon tags container styles */
+.sermon-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+/* Individual sermon tag styles */
+.sermon-tag {
+    background: var(--background);
+    padding: 2px var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Modal styles for video popup */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+    margin: 5vh auto;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

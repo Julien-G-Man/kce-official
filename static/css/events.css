@@ -1,0 +1,214 @@
+/* Header section styles with gradient background */
+.events-header {
+    background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: calc(64px + var(--spacing-xl)) 0 var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Typography styles for header */
+.events-header h1, .events-header p {
+    font-family: 'Georgia', serif;
+}
+
+/* Event filters container styles */
+.events-filters {
+    background: var(--surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Filter controls container styles */
+.filter-group {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Filter input field styles */
+.filter-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--text-secondary);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    min-width: 200px;
+}
+
+/* Event card container styles */
+.event-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal);
+}
+
+/* Event card hover effect */
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Event image styles */
+.event-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Event date badge styles */
+.event-date {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: var(--primary);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+}
+
+/* Event information container styles */
+.event-info {
+    padding: var(--spacing-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Event metadata styles */
+.event-meta {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Event metadata icon styles */
+.event-meta i {
+    margin-right: var(--spacing-xs);
+}
+
+/* Event action buttons container styles */
+.event-actions {
+    margin-top: auto;
+    padding-top: var(--spacing-md);
+}
+
+/* Event tags container styles */
+.event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+/* Individual event tag styles */
+.event-tag {
+    background: var(--background);
+    padding: 2px var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Calendar view container styles */
+.calendar-view {
+    display: none;
+    margin-top: var(--spacing-xl);
+}
+
+/* Active calendar view styles */
+.calendar-view.active {
+    display: block;
+}
+
+/* Calendar grid layout styles */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+/* Calendar header styles */
+.calendar-header {
+    text-align: center;
+    font-weight: 600;
+    padding: var(--spacing-sm);
+}
+
+/* Calendar day cell styles */
+.calendar-day {
+    aspect-ratio: 1;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--text-secondary);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+/* Calendar day hover effect */
+.calendar-day:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Calendar day with event styles */
+.calendar-day.has-event {
+    background: var(--primary);
+    color: white;
+}
+
+/* View toggle buttons container styles */
+.view-toggle {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* View toggle button styles */
+.view-toggle button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--text-secondary);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+/* Active view toggle button styles */
+.view-toggle button.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Loading indicator styles */
+.loading {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+/* Loading spinner animation */
+.loading i {
+    font-size: 2rem;
+    animation: spin 1s linear infinite;
+}
+
+/* Loading spinner keyframes */
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* No events message styles */
+.no-events {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}

@@ -1,0 +1,59 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Events - Kingdom Civilization Embassy{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'css/events.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="events-header">
+        <div class="container">
+            <h1 class="text-center">Our Events</h1>
+            <p class="text-center">Raising A Supernatural Army To Take Captive Their Generation for God</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="events-filters">
+            <div class="filter-group">
+                <input type="text" id="searchInput" class="filter-input" placeholder="Search events...">
+                <select id="categoryFilter" class="filter-input">
+                    <option value="">All Categories</option>
+                </select>
+                <select id="dateFilter" class="filter-input">
+                    <option value="">All Dates</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="past">Past Events</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="view-toggle">
+            <button class="active" data-view="grid">
+                <i class="fas fa-th-large"></i> Grid View
+            </button>
+            <button data-view="calendar">
+                <i class="fas fa-calendar"></i> Calendar View
+            </button>
+        </div>
+
+        <div class="events-grid grid grid-3">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading events...</p>
+            </div>
+        </div>
+
+        <div class="calendar-view">
+            <div class="calendar-grid">
+                </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/events.js' %}"></script>
+{% endblock %}

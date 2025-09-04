@@ -1,0 +1,205 @@
+/* About Page Specific Styles */
+/* Header section styles with gradient background */
+.about-header {
+    background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: calc(64px + var(--spacing-md)) 0 var(--spacing-md) 0;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Typography styles for header */
+.about-header h1, .about-header p {
+    font-family: 'Georgia', serif;
+}
+
+/* Mission section container styles */
+.mission-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Grid layout for mission cards */
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+/* Individual mission card styles */
+.mission-card {
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--background);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-normal);
+}
+
+/* Hover effect for mission cards */
+.mission-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Mission icon styles */
+.mission-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* History section container styles */
+.history-intro-section {
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Timeline container styles */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md) 0;
+}
+
+/* Timeline vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: var(--primary);
+}
+
+/* Individual timeline item styles */
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-md);
+    width: 50%;
+    padding: 0 var(--spacing-md);
+}
+
+/* Timeline item positioning for odd items */
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+/* Timeline item positioning for even items */
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+/* Timeline content card styles */
+.timeline-content {
+    background: var(--surface);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Timeline date styles */
+.timeline-date {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Leadership section container styles */
+.leadership-section {
+    background: var(--background);
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Grid layout for leadership cards */
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+/* Individual leader card styles */
+.leader-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal);
+}
+
+/* Hover effect for leader cards */
+.leader-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Leader image styles */
+.leader-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* Leader information container styles */
+.leader-info {
+    padding: var(--spacing-md);
+}
+
+/* Social media links container styles */
+.leader-social {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+/* Social media link styles */
+.leader-social a {
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+}
+
+/* Hover effect for social media links */
+.leader-social a:hover {
+    color: var(--primary);
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+    /* Single column layout for mission cards on mobile */
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Adjust timeline line position for mobile */
+    .timeline::before {
+        left: 0;
+    }
+
+    /* Adjust timeline items for mobile layout */
+    .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: var(--spacing-md);
+    }
+
+    /* Make featured image fit screen width on mobile */
+    .section-image {
+        max-width: 100%; /* Allow image to expand */
+        width: 100%; /* Make image take full width */
+    }
+}
+
+/* Featured image styles */
+.section-image {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto var(--spacing-md) auto;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}

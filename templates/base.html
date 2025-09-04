@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kingdom Civilization Embassy{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2dIeI+E-L7h5M2M7+i9z8+94A06f6Xv4Xz7Bw+n5t6Pz0t7N4P4/v2l54Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="{% static 'img/logo.jpeg' %}" alt="Kingdom Civilization Embassy Logo">
+            </div>
+            <div class="nav-menu">
+                <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'sermons' %}">Sermons</a>
+                <a href="{% url 'events' %}">Events</a>
+                <a href="{% url 'quotes' %}">Quotes</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content grid grid-4">
+                <div class="footer-section">
+                    <img src="{% static 'img/logo.jpeg' %}" alt="Kingdom Civilization Embassy" height="50" style="border-radius: var(--radius-lg); margin-bottom: var(--spacing-lg);">
+                    <p>Raising A Supernatural Army To Take Captive Their Generation for God</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">🏠 Home</a></li>
+                        <li><a href="{% url 'about' %}">👥 About Us</a></li>
+                        <li><a href="{% url 'sermons' %}">🎙️ Sermons</a></li>
+                        <li><a href="{% url 'events' %}">📅 Events</a></li>
+                        <li><a href="https://linktr.ee/kingdomcivilizationembassy">📚 Books</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-users"></i> Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/TheWarriorBrideWorldwide/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/kingdomcivilizationembassy/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@KCEONLINE" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@kce.online" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://t.me/Ansere1" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-map-pin"></i> Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> MCWV+F43, Kumasi</p>
+                    <p><i class="fas fa-phone"></i> (+233)054 630 4940</p>
+                    <p><i class="fas fa-envelope"></i> warriorbrideministry@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kingdom Civilization Embassy. All rights reserved. Built with ❤️ for God's Kingdom</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    {% block scripts_extra %}{% endblock %}
+
+</body>
+</html>

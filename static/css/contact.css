@@ -1,0 +1,204 @@
+/* Header section styles with gradient background */
+.contact-header {
+    background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: calc(64px + var(--spacing-xl)) 0 var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Typography styles for header */
+.contact-header h1, .contact-header p {
+    font-family: 'Georgia', serif;
+}
+
+/* Two-column grid layout for contact section */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Contact information card styles */
+.contact-info {
+    background: var(--surface);
+    padding: var(--spacing-md) !important;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    font-size: 0.97rem !important;
+}
+
+/* Individual contact item styles */
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Contact icon styles */
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Contact form card styles */
+.contact-form {
+    background: var(--surface);
+    padding: var(--spacing-md) !important;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    font-size: 0.97rem !important;
+}
+
+/* Form group container styles */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Form label styles */
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+/* Form input styles */
+.form-control {
+    width: 100%;
+    padding: 0.6rem 0.8rem !important;
+    border: 1px solid var(--text-secondary);
+    border-radius: var(--radius-md);
+    font-size: 0.97rem !important;
+    transition: border-color var(--transition-fast);
+    min-height: 36px !important;
+}
+
+/* Form input focus state */
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Textarea specific styles */
+textarea#message.form-control {
+    min-height: 150px !important;
+    padding: var(--spacing-md) !important;
+    font-size: 1rem !important;
+}
+
+/* Google Maps container styles */
+.map-container {
+    height: 400px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Google Maps iframe styles */
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Social media links container styles */
+.social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* Individual social media link styles */
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: var(--background);
+    color: var(--text-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all var(--transition-fast);
+}
+
+/* Social media link hover effect */
+.social-link:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Form success message styles */
+.form-success {
+    display: none;
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--success);
+    color: white;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Form error message styles */
+.form-error {
+    display: none;
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--danger);
+    color: white;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Contact form button styles */
+.contact-form .btn {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.97rem !important;
+    min-height: 38px !important;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Adjustments for contact section headings on tablet */
+    .contact-info h2 {
+        font-size: 1.8rem; /* Slightly smaller for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjustments for contact section headings on mobile */
+    .contact-info h2 {
+        font-size: 1.5rem; /* Further reduced for smaller mobile screens */
+    }
+
+    /* Adjustments for form controls on mobile */
+    .form-control {
+        padding: var(--spacing-xs) var(--spacing-sm); /* Further reduced vertical padding */
+    }
+
+    /* Adjustments for contact form button on mobile */
+    .contact-form .btn {
+        padding: 0.6rem 1rem; /* Reduced padding */
+        font-size: 0.9rem; /* Slightly smaller font size */
+        width: 100%; /* Ensure it still takes full width */
+    }
+
+    /* Reduce padding for contact info and form cards on mobile for better fit */
+    .contact-info,
+    .contact-form {
+        padding: var(--spacing-sm); /* Further reduced to 1rem (16px) to match container padding */
+    }
+}

@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/give.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="give-header">
+        <div class="container">
+            <h1 class="text-center">Partnership Offering</h1>
+            <p class="text-center">To all ardent followers of the Man of God, Pastor Ansere (The Teaching Priest) and his highly anointed, systematic, strategic and enlightening teaching ministry and to all who have been blessed by him, kindly consider sending a special Seed offering or Partnership offering to the Man of God to appreciate the impact of his life and ministry in your life.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="give-grid">
+            <div class="give-info">
+                <h2>About Your Partnership and Offerings</h2>
+                <p>Your partnership and offerings are vital to our ministry, enabling us to continue impacting lives, spreading the Gospel, and bringing God's kingdom to bear on earth. Every seed sown helps us to raise a supernatural army and fulfill our divine mandate.</p>
+
+                <div class="mission-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h3>Community Impact</h3>
+                            <p>Supporting local families and individuals in need</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h3>Global Outreach</h3>
+                            <p>Extending our ministry to communities worldwide</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-hands-helping"></i>
+                        <div>
+                            <h3>Ministry Growth</h3>
+                            <p>Expanding our programs and services</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Ways to Give</h3>
+                <ul>
+                    <li>One-time donations</li>
+                    <li>Missions support</li>
+                    <li>Youth Ministry</li>
+                    <li>General Fund</li>
+                    <li>Partnership</li>
+                </ul>
+
+                <div class="other-ways-to-give" style="margin-top: 2rem;">
+                    <h3>Other Ways to Give</h3>
+                    <p>You can also give directly through the following methods:</p>
+                    
+                    <h4 style="margin-top: 1.5rem;">MTN Mobile Money</h4>
+                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                    <p><strong>Phone Number:</strong> (+233) 054-7431863</p>
+
+                    <h4 style="margin-top: 1.5rem;">Ecobank</h4>
+                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                    <p><strong>Account Number:</strong> 1441004818512</p>
+                    <p><strong>SWIFT CODE:</strong> ECOCGHAC</p>
+
+                    <h4 style="margin-top: 1.5rem;">UBA Dollar Account</h4>
+                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                    <p><strong>Account Number:</strong> 02048584802231</p>
+                    <p><strong>SWIFT CODE:</strong> STBGGHAC</p>
+
+                    <h4 style="margin-top: 1.5rem;">UBA Cedi Account</h4>
+                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                    <p><strong>Account Number:</strong> 02048584801552</p>
+                </div>
+
+                <div class="security-info">
+                    <i class="fas fa-lock"></i>
+                    <p>All payments and donations are secure and encrypted</p>
+                </div>
+            </div>
+
+            <div class="give-form">
+                <h2>Make a Donation Right From Website</h2>
+                <p>Choose an amount and payment method below</p>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-2"></i> {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="form-success alert alert-success" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Thank you for your generous donation!</p>
+                </div>
+
+                <div class="form-error alert alert-danger" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>There was an error processing your donation. Please try again.</p>
+                </div>
+
+                <form id="donationForm" method="POST" action="{% url 'give' %}">
+                    {% csrf_token %}
+                    <div class="donation-options">
+                        <div class="donation-option" data-amount="200" data-usd-amount="20">
+                            <div class="donation-amount">GHS200</div>
+                        </div>
+                        <div class="donation-option" data-amount="500" data-usd-amount="50">
+                            <div class="donation-amount">GHS500</div>
+                        </div>
+                        <div class="donation-option" data-amount="1000" data-usd-amount="100">
+                            <div class="donation-amount">GHS1000</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-amount">
+                        <input type="number" id="customAmount" placeholder="Enter custom amount" min="1" name="amount">
+                    </div>
+
+                    <div class="payment-methods">
+                        <div class="payment-method active" data-method="card">
+                            <i class="fas fa-credit-card"></i>
+                            <div>Card</div>
+                        </div>
+                        <div class="payment-method" data-method="bank">
+                            <i class="fas fa-university"></i>
+                            <div>Bank</div>
+                        </div>
+                        <div class="payment-method" data-method="momo">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>MOMO</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="paymentMethod" name="payment_method" value="card">
+
+                    <div id="cardDetails">
+                        <div class="form-group">
+                            <label for="cardName">Name on Card</label>
+                            <input type="text" id="cardName" name="card_name" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" name="card_number" class="form-control">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" name="expiry_date" class="form-control" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="momoDetails" style="display: none;">
+                        <label for="momoNumber">Mobile Money Number</label>
+                        <input type="text" id="momoNumber" name="momo_number" class="form-control">
+                    </div>
+
+                    <div class="form-group" id="emailFormGroup">
+                        <label for="email">Email Address (Optional)</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                        <small class="form-text text-muted">Provide email to receive a receipt of your donation</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Additional Details (Optional)</label>
+                        <textarea id="description" name="description" class="form-control" rows="3" placeholder="Add any additional information or prayer requests here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purpose">Purpose of Donation</label>
+                        <select id="purpose" name="purpose" class="form-control">
+                            <option value="general">Partnership Seed</option>
+                            <option value="building">Special Offering</option>
+                            <option value="missions">First Fruits</option>
+                            <option value="youth">Youth Ministry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block script_extra %}
+    <script src="{% static 'js/give.js' %}"></script>
+{% endblock %}

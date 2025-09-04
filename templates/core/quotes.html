@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Quotes - Kingdom Civilization Embassy{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'css/quotes.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="quotes-header">
+        <div class="container">
+            <h1 class="text-center">Quotes by Pastor Ansere</h1>
+            <p class="text-center">Inspiring words of wisdom from Pastor Francis Ansere</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="quotes-filters">
+            <div class="filter-group">
+                <input type="text" id="searchInput" class="filter-input" placeholder="Search quotes...">
+                <select id="categoryFilter" class="filter-input">
+                    <option value="">All Categories</option>
+                </select>
+                <select id="dateFilter" class="filter-input">
+                    <option value="">All Dates</option>
+                    <option value="latest">Latest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+            <div class="tags-filter mt-2">
+                <div class="tags-container" id="tagsContainer">
+                    </div>
+            </div>
+        </div>
+
+        <div id="quotesContainer">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading quotes...</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/quotes.js' %}"></script>
+{% endblock %}
