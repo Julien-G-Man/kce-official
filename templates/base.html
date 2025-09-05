@@ -19,14 +19,14 @@
                 <img src="{% static 'img/logo.jpeg' %}" alt="Kingdom Civilization Embassy Logo">
             </div>
             <div class="nav-menu">
-                <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
-                <a href="{% url 'about' %}">About Us</a>
-                <a href="{% url 'sermons' %}">Sermons</a>
-                <a href="{% url 'events' %}">Events</a>
-                <a href="{% url 'quotes' %}">Quotes</a>
-                <a href="{% url 'contact' %}">Contact</a>
+                <a href="{% url 'core:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+                <a href="{% url 'core:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About Us</a>
+                <a href="{% url 'core:sermons' %}" class="{% if request.resolver_match.url_name == 'sermons' %}active{% endif %}">Sermons</a>
+                <a href="{% url 'core:events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a>
+                <a href="{% url 'core:quotes' %}" class="{% if request.resolver_match.url_name == 'quotes' %}active{% endif %}">Quotes</a>
+                <a href="{% url 'core:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
             </div>
-            <button class="nav-toggle">
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -48,10 +48,10 @@
                 <div class="footer-section">
                     <h4><i class="fas fa-link"></i> Quick Links</h4>
                     <ul>
-                        <li><a href="{% url 'home' %}">🏠 Home</a></li>
-                        <li><a href="{% url 'about' %}">👥 About Us</a></li>
-                        <li><a href="{% url 'sermons' %}">🎙️ Sermons</a></li>
-                        <li><a href="{% url 'events' %}">📅 Events</a></li>
+                        <li><a href="{% url 'core:home' %}">🏠 Home</a></li>
+                        <li><a href="{% url 'core:about' %}">👥 About Us</a></li>
+                        <li><a href="{% url 'core:sermons' %}">🎙️ Sermons</a></li>
+                        <li><a href="{% url 'core:events' %}">📅 Events</a></li>
                         <li><a href="https://linktr.ee/kingdomcivilizationembassy">📚 Books</a></li>
                     </ul>
                 </div>

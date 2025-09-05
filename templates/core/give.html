@@ -106,7 +106,7 @@
                     <p>There was an error processing your donation. Please try again.</p>
                 </div>
 
-                <form id="donationForm" method="POST" action="{% url 'give' %}">
+                <form id="donationForm" method="POST" action="{% url 'core:give' %}">
                     {% csrf_token %}
                     <div class="donation-options">
                         <div class="donation-option" data-amount="200" data-usd-amount="20">

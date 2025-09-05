@@ -64,8 +64,7 @@ ROOT_URLCONF = 'kce_online.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'DIRS': [BASE_DIR / 'templates' ],
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,8 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS  = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Custom User
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -142,6 +141,6 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logins
-LOGIN_URL = "/accounts/login/" # to be implemented later
-LOGIN_REDIRECT_URL = "/" # adjust when accounts app exists
-LOGOUT_REDIRECT_URL = "/"
+LOGIN_URL = "/accounts/login/" # Consider changing to a named URL like 'accounts:login' once implemented
+LOGIN_REDIRECT_URL = "core:home"
+LOGOUT_REDIRECT_URL = "core:home"

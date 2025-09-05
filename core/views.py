@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .models import Event, Sermon, Quote
+from .models import CorePage, Event, Sermon, Quote
 
 # Create your views here.
 def home(request):
@@ -34,5 +34,10 @@ def give(request):
    return render(request, 'core/give.html')
 
 def quotes(request):
-   all_quotes = Quote.objects.all()
+   all_quotes = Quote.objects.order_by('author', 'id')
    return render(request, 'core/quotes.html', {'quotes': all_quotes})
+
+def core_page_detail(request, slug):
+   page = get_object_or_404(CorePage, slug=slug)
+   context = {'page': page}
+   return render(request, 'core/core_page_detail.html', context)
