@@ -3,196 +3,172 @@
 
 {% block head_extra %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <link rel="stylesheet" href="{% static 'css/give.css' %}">
 {% endblock %}
 
 {% block content %}
-    <header class="give-header">
+    <header class="give-header text-center">
         <div class="container">
-            <h1 class="text-center">Partnership Offering</h1>
-            <p class="text-center">To all ardent followers of the Man of God, Pastor Ansere (The Teaching Priest) and his highly anointed, systematic, strategic and enlightening teaching ministry and to all who have been blessed by him, kindly consider sending a special Seed offering or Partnership offering to the Man of God to appreciate the impact of his life and ministry in your life.</p>
+            <h1>Sow a Seed, Cultivate a Harvest 🌾</h1>
+            <p>Your partnership offering is a vital seed that helps us spread the Gospel and impact lives. We appreciate your generosity and faith!</p>
         </div>
     </header>
 
-    <main class="container">
+    <main class="container give-main">
         <div class="give-grid">
             <div class="give-info">
-                <h2>About Your Partnership and Offerings</h2>
-                <p>Your partnership and offerings are vital to our ministry, enabling us to continue impacting lives, spreading the Gospel, and bringing God's kingdom to bear on earth. Every seed sown helps us to raise a supernatural army and fulfill our divine mandate.</p>
-
-                <div class="mission-stats">
-                    <div class="stat-item">
-                        <i class="fas fa-users"></i>
-                        <div>
+                <section class="info-section">
+                    <h2>Why Your Giving Matters</h2>
+                    <p>Every donation, no matter the size, fuels our ministry and its mission. Your contribution helps us with community outreach, global evangelism, and essential ministry operations.</p>
+                    <div class="mission-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-hand-holding-heart"></i>
                             <h3>Community Impact</h3>
-                            <p>Supporting local families and individuals in need</p>
+                            <p>Providing for local families, individuals, and those in need.</p>
                         </div>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-globe"></i>
-                        <div>
+                        <div class="stat-item">
+                            <i class="fas fa-globe-americas"></i>
                             <h3>Global Outreach</h3>
-                            <p>Extending our ministry to communities worldwide</p>
+                            <p>Extending our anointing and message to communities worldwide.</p>
                         </div>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-hands-helping"></i>
-                        <div>
+                        <div class="stat-item">
+                            <i class="fas fa-church"></i>
                             <h3>Ministry Growth</h3>
-                            <p>Expanding our programs and services</p>
+                            <p>Expanding our programs and services to reach more souls.</p>
                         </div>
                     </div>
-                </div>
-
-                <h3>Ways to Give</h3>
-                <ul>
-                    <li>One-time donations</li>
-                    <li>Missions support</li>
-                    <li>Youth Ministry</li>
-                    <li>General Fund</li>
-                    <li>Partnership</li>
-                </ul>
-
-                <div class="other-ways-to-give" style="margin-top: 2rem;">
-                    <h3>Other Ways to Give</h3>
-                    <p>You can also give directly through the following methods:</p>
-                    
-                    <h4 style="margin-top: 1.5rem;">MTN Mobile Money</h4>
-                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
-                    <p><strong>Phone Number:</strong> (+233) 054-7431863</p>
-
-                    <h4 style="margin-top: 1.5rem;">Ecobank</h4>
-                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
-                    <p><strong>Account Number:</strong> 1441004818512</p>
-                    <p><strong>SWIFT CODE:</strong> ECOCGHAC</p>
-
-                    <h4 style="margin-top: 1.5rem;">UBA Dollar Account</h4>
-                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
-                    <p><strong>Account Number:</strong> 02048584802231</p>
-                    <p><strong>SWIFT CODE:</strong> STBGGHAC</p>
-
-                    <h4 style="margin-top: 1.5rem;">UBA Cedi Account</h4>
-                    <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
-                    <p><strong>Account Number:</strong> 02048584801552</p>
-                </div>
-
-                <div class="security-info">
-                    <i class="fas fa-lock"></i>
-                    <p>All payments and donations are secure and encrypted</p>
-                </div>
+                </section>
+                
+                <section class="info-section other-ways-to-give">
+                    <h2>Other Ways to Give</h2>
+                    <p>Can't use the online form? You can give directly through the methods below.</p>
+                    <div class="bank-details">
+                        <div class="bank-item">
+                            <h3>MTN Mobile Money</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Phone:</strong> (+233) 054-7431863</p>
+                        </div>
+                        <div class="bank-item">
+                            <h3>Ecobank</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Account Number:</strong> 1441004818512</p>
+                            <p><strong>SWIFT Code:</strong> ECOCGHAC</p>
+                        </div>
+                        <div class="bank-item">
+                            <h3>UBA Dollar Account</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Account Number:</strong> 02048584802231</p>
+                            <p><strong>SWIFT Code:</strong> STBGGHAC</p>
+                        </div>
+                        <div class="bank-item">
+                            <h3>UBA Cedi Account</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Account Number:</strong> 02048584801552</p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
-            <div class="give-form">
-                <h2>Make a Donation Right From Website</h2>
-                <p>Choose an amount and payment method below</p>
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                            <i class="bi bi-exclamation-triangle me-2"></i> {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
-                <div class="form-success alert alert-success" style="display: none;">
-                    <i class="fas fa-check-circle"></i>
-                    <p>Thank you for your generous donation!</p>
-                </div>
-
-                <div class="form-error alert alert-danger" style="display: none;">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <p>There was an error processing your donation. Please try again.</p>
-                </div>
-
+            <div class="give-form-container">
                 <form id="donationForm" method="POST" action="{% url 'core:give' %}">
                     {% csrf_token %}
-                    <div class="donation-options">
-                        <div class="donation-option" data-amount="200" data-usd-amount="20">
-                            <div class="donation-amount">GHS200</div>
+                    <h2>Make a Donation</h2>
+                    <p>🔐For security reasons, this feature cannot yet be implimented.</p>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                <i class="bi bi-exclamation-triangle me-2"></i> {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="form-group">
+                        <label for="amount">Choose Amount</label>
+                        <div class="donation-options">
+                            <div class="donation-option active" data-amount="200">GHS 200</div>
+                            <div class="donation-option" data-amount="500">GHS 500</div>
+                            <div class="donation-option" data-amount="1000">GHS 1000</div>
                         </div>
-                        <div class="donation-option" data-amount="500" data-usd-amount="50">
-                            <div class="donation-amount">GHS500</div>
-                        </div>
-                        <div class="donation-option" data-amount="1000" data-usd-amount="100">
-                            <div class="donation-amount">GHS1000</div>
-                        </div>
-                    </div>
-
-                    <div class="custom-amount">
-                        <input type="number" id="customAmount" placeholder="Enter custom amount" min="1" name="amount">
-                    </div>
-
-                    <div class="payment-methods">
-                        <div class="payment-method active" data-method="card">
-                            <i class="fas fa-credit-card"></i>
-                            <div>Card</div>
-                        </div>
-                        <div class="payment-method" data-method="bank">
-                            <i class="fas fa-university"></i>
-                            <div>Bank</div>
-                        </div>
-                        <div class="payment-method" data-method="momo">
-                            <i class="fas fa-mobile-alt"></i>
-                            <div>MOMO</div>
+                        <div class="custom-amount-group">
+                            <input type="number" id="customAmount" placeholder="Or enter a custom amount" min="1" name="amount" class="form-control" value="200">
                         </div>
                     </div>
-                    <input type="hidden" id="paymentMethod" name="payment_method" value="card">
+                    
+                    <div class="form-group">
+                        <label>Select Purpose</label>
+                        <div class="purpose-options">
+                            <div class="purpose-option active" data-purpose="Partnership Seed">Partnership Seed</div>
+                            <div class="purpose-option" data-purpose="Special Offering">Special Offering</div>
+                            <div class="purpose-option" data-purpose="First Fruits">First Fruits</div>
+                            <div class="purpose-option" data-purpose="Youth Ministry">Youth Ministry</div>
+                            <div class="purpose-option" data-purpose="Other">Other</div>
+                        </div>
+                        <input type="hidden" id="purpose" name="purpose" value="Partnership Seed">
+                    </div>
 
-                    <div id="cardDetails">
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-methods">
+                            <div class="payment-method active" data-method="card">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Card</span>
+                            </div>
+                            <div class="payment-method" data-method="momo">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>MOMO</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="paymentMethod" name="payment_method" value="card">
+                    </div>
+                    
+                    <div id="cardDetails" class="payment-details active">
                         <div class="form-group">
                             <label for="cardName">Name on Card</label>
-                            <input type="text" id="cardName" name="card_name" class="form-control">
+                            <input type="text" id="cardName" name="card_name" class="form-control" placeholder="John Doe" required>
                         </div>
-
                         <div class="form-group">
                             <label for="cardNumber">Card Number</label>
-                            <input type="text" id="cardNumber" name="card_number" class="form-control">
+                            <input type="text" id="cardNumber" name="card_number" class="form-control" placeholder="1234-5678-9012-3456" required>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="expiryDate">Expiry Date</label>
-                                <input type="text" id="expiryDate" name="expiry_date" class="form-control" placeholder="MM/YY">
+                                <input type="text" id="expiryDate" name="expiry_date" class="form-control" placeholder="MM/YY" required>
                             </div>
                             <div class="form-group">
                                 <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" class="form-control">
+                                <input type="text" id="cvv" name="cvv" class="form-control" placeholder="123" required>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group" id="momoDetails" style="display: none;">
-                        <label for="momoNumber">Mobile Money Number</label>
-                        <input type="text" id="momoNumber" name="momo_number" class="form-control">
+                    
+                    <div id="momoDetails" class="payment-details">
+                        <div class="form-group">
+                            <label for="momoNumber">Mobile Money Number</label>
+                            <input type="tel" id="momoNumber" name="momo_number" class="form-control" placeholder="e.g., 0541234567">
+                        </div>
                     </div>
 
-                    <div class="form-group" id="emailFormGroup">
+                    <div class="form-group">
                         <label for="email">Email Address (Optional)</label>
-                        <input type="email" id="email" name="email" class="form-control">
-                        <small class="form-text text-muted">Provide email to receive a receipt of your donation</small>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email to receive a receipt">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="description">Additional Details (Optional)</label>
-                        <textarea id="description" name="description" class="form-control" rows="3" placeholder="Add any additional information or prayer requests here..."></textarea>
+                        <textarea id="description" name="description" class="form-control" rows="3" placeholder="Add any special notes or prayer requests here..."></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="purpose">Purpose of Donation</label>
-                        <select id="purpose" name="purpose" class="form-control">
-                            <option value="general">Partnership Seed</option>
-                            <option value="building">Special Offering</option>
-                            <option value="missions">First Fruits</option>
-                            <option value="youth">Youth Ministry</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-submit">
                         <i class="fas fa-heart"></i> Donate Now
                     </button>
+                    
+                    <div class="security-info">
+                        <i class="fas fa-lock"></i>
+                        <span>Your donation is secure and encrypted.</span>
+                    </div>
                 </form>
             </div>
         </div>

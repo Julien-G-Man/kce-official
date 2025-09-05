@@ -10,15 +10,15 @@
 {% block content %}
     <header class="about-header fade-in">
         <div class="container">
-            <h1>About Us</h1>
-            <p>Learn more about our ministry and mission</p>
+            <h1 class="text-center">About Us</h1>
+            <p class="text-center">Learn more about our ministry and mission</p>
         </div>
     </header>
 
-    <section class="section history-intro-section">
-        <div class="container">
-            <div class="mission-section fade-in">
-                <h2>Our History</h2>
+    <main class="container">
+        <section class="history-section fade-in">
+            <div class="mission-section">
+                <h2 class="text-center">Our History</h2>
                 <p>Welcome to Warrior Bride Worldwide Ministry A.K.A The Kingdom Civilization Embassy (KCE)</p>
                 <p>We are a vibrant commission dedicated to raising a supernatural army of believers who are passionate about taking Captive their Generation for God.</p>
                 <p>Our mission is to empower, equip, and mobilize this generation to fulfill their divine purpose and bring transformation to the nations of our world according to the Christ Pattern.</p>
@@ -26,17 +26,15 @@
                 <p>Join this chariot of Christ, to Discover Your Destiny, Impact History and to Transform Your World!</p>
                 <p>Shalom, Shalom!</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <main class="container">
-        <img src="{% static 'img/youthpackage.jpg' %}" alt="Youth Package" class="section-image fade-in" loading="lazy">
+        <img src="{% static 'images/youthpackage.jpg' %}" alt="Youth Package" class="section-image fade-in" loading="lazy">
 
-        <section class="section mission-section">
-            <h2 class="text-center fade-in">Our Mission</h2>
-            <p class="text-center fade-in">We are committed to raising a generation of believers who are equipped, empowered, and ready to fulfill their divine purpose in Christ.</p>
+        <section class="mission-section fade-in">
+            <h2 class="text-center">Our Mission</h2>
+            <p class="text-center">We are committed to raising a generation of believers who are equipped, empowered, and ready to fulfill their divine purpose in Christ.</p>
             
-            <div class="mission-grid mt-3">
+            <div class="mission-grid">
                 <div class="mission-card fade-in">
                     <div class="mission-icon">
                         <i class="fas fa-cross"></i>
@@ -61,8 +59,8 @@
             </div>
         </section>
 
-        <section class="section history-timeline-section">
-            <h2 class="text-center fade-in">Our History</h2>
+        <section class="history-section fade-in">
+            <h2 class="text-center">Our History</h2>
             <div class="timeline">
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
@@ -95,13 +93,13 @@
             </div>
         </section>
 
-        <section class="section leadership-section">
-            <h2 class="text-center fade-in">Our Leadership</h2>
-            <div class="leadership-grid mt-3">
+        <section class="leadership-section fade-in">
+            <h2 class="text-center">Our Leadership</h2>
+            <div class="leadership-grid">
                 <div class="leader-card fade-in">
                     <img src="{% static 'img/ansere.jpg' %}" alt="Senior Pastor" class="leader-image" loading="lazy">
                     <div class="leader-info">
-                        <h3>Francis Ansere</h3>
+                        <h3>Pastor Francis Ansere</h3>
                         <p class="text-secondary">Senior Pastor</p>
                         <p>With over 17 years of ministry experience, Pastor Francis Ansere leads our church with wisdom and vision.</p>
                         <div class="leader-social">
@@ -111,7 +109,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </section>
     </main>
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/about.js' %}"></script>
 {% endblock %}

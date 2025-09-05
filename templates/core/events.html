@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
@@ -27,6 +26,7 @@
                     {% endfor %}
                 </select>
                 <select id="dateFilter" name="date_filter" class="filter-input">
+                    <option value="">All Dates</option>
                     <option value="upcoming" {% if request.GET.date_filter == 'upcoming' %}selected{% endif %}>Upcoming</option>
                     <option value="past" {% if request.GET.date_filter == 'past' %}selected{% endif %}>Past Events</option>
                 </select>
@@ -43,17 +43,39 @@
             </button>
         </div>
 
-        <div class="events-grid grid grid-3">
+        <div class="events-grid grid grid-3 active-view">
             {% for event in events %}
-                <div class="card event-card">
-                    {% if event.image %}
-                        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-thumbnail">
-                    {% endif %}
-                    <div class="card-content">
+                <div class="event-card">
+                    <div style="position: relative;">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image" loading="lazy">
+                        <div class="event-date">
+                            {{ event.date|date:"M j, Y" }}
+                        </div>
+                    </div>
+                    <div class="event-info">
                         <h3>{{ event.title }}</h3>
-                        <p><i class="fas fa-calendar"></i> {{ event.date|date:"F j, Y" }}</p>
-                        <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
-                        {# <a href="#" class="btn">View Details</a> #}
+                        <div class="event-meta">
+                            <p><i class="fas fa-clock"></i> {{ event.time|time:"H:i" }}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                            {% if event.category %}
+                                <p><i class="fas fa-folder"></i> {{ event.category }}</p>
+                            {% endif %}
+                        </div>
+                        <p>{{ event.description|truncatewords:20 }}</p>
+                        {% if event.tags.all %}
+                            <div class="event-tags">
+                                {% for tag in event.tags.all %}
+                                    <span class="event-tag">{{ tag.name }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="event-actions">
+                            {% if event.registration_url %}
+                                <a href="{{ event.registration_url }}" class="btn" target="_blank">
+                                    <i class="fas fa-calendar-plus"></i> Register Now
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             {% empty %}
@@ -72,5 +94,8 @@
 {% endblock %}
 
 {% block scripts_extra %}
+    <script>
+        const allEvents = {{ events_json|safe }};
+    </script>
     <script src="{% static 'js/events.js' %}"></script>
 {% endblock %}

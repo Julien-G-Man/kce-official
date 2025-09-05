@@ -17,10 +17,14 @@
 
     <main class="container">
         <div class="quotes-filters">
+            <h3>Filter Quotes</h3>
             <div class="filter-group">
                 <input type="text" id="searchInput" class="filter-input" placeholder="Search quotes...">
                 <select id="categoryFilter" class="filter-input">
                     <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
                 </select>
                 <select id="dateFilter" class="filter-input">
                     <option value="">All Dates</option>
@@ -28,21 +32,53 @@
                     <option value="oldest">Oldest First</option>
                 </select>
             </div>
-            <div class="tags-filter mt-2">
+            <div class="tags-filter">
+                <h4>Filter by Tags</h4>
                 <div class="tags-container" id="tagsContainer">
                     </div>
             </div>
         </div>
 
-        <div id="quotesContainer">
-            <div class="loading">
-                <i class="fas fa-spinner"></i>
-                <p>Loading quotes...</p>
-            </div>
+        <div id="quotesContainer" class="quotes-grid grid grid-3">
+            {% if quotes %}
+                {% for quote in quotes %}
+                    <div class="quote-card" 
+                         data-category="{{ quote.category|lower }}" 
+                         data-date="{{ quote.date|date:'Y-m-d' }}" 
+                         data-tags="{% for tag in quote.tags.all %}{{ tag.name|lower }}{% if not forloop.last %},{% endif %}{% endfor %}"
+                         data-text="{{ quote.text|lower }}"
+                         data-context="{{ quote.context|lower }}">
+                        <div class="quote-text">
+                            "{{ quote.text|safe }}"
+                        </div>
+                        <div class="quote-meta">
+                            <p><i class="fas fa-book"></i> {{ quote.source }}</p>
+                            <p><i class="fas fa-calendar"></i> {{ quote.date|date:"F j, Y" }}</p>
+                            {% if quote.category %}
+                                <p><i class="fas fa-folder"></i> {{ quote.category }}</p>
+                            {% endif %}
+                            {% if quote.context %}
+                                <p><i class="fas fa-info-circle"></i> {{ quote.context }}</p>
+                            {% endif %}
+                        </div>
+                        <p class="quote-author">{{ quote.speaker }}</p>
+                        <div class="quote-tags">
+                            {% for tag in quote.tags.all %}
+                                <span class="quote-tag">{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-quotes">
+                    <i class="fas fa-search"></i>
+                    <p>No quotes found matching your criteria.</p>
+                </div>
+            {% endif %}
         </div>
     </main>
 {% endblock %}
 
-{% block scripts_extra %}
+{% block script_extra %}
     <script src="{% static 'js/quotes.js' %}"></script>
 {% endblock %}

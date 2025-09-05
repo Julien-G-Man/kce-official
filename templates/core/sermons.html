@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Sermons | Kingdom Civilization Embassy{% endblock %}
+
 {% block head_extra %}
     <link rel="stylesheet" href="{% static 'css/sermons.css' %}">
 {% endblock %}
@@ -33,14 +35,27 @@
                 <select id="dateFilter" class="filter-input">
                     <option value="">Sort by Date</option>
                     <option value="latest">Latest First</option>
+                    <option value="oldest">Oldest First</option>
                 </select>
+            </div>
+            <div class="tags-filter">
+                <h4>Filter by Tags</h4>
+                <div id="tagsContainer" class="tags-container">
+                    </div>
             </div>
         </div>
 
         <div class="sermons-grid grid grid-3" id="sermonsGrid">
             {% if sermons %}
                 {% for sermon in sermons %}
-                    <div class="card sermon-card" data-preview-url="{{ sermon.video_url }}">
+                    <div class="card sermon-card" 
+                         data-preview-url="{{ sermon.video_url }}" 
+                         data-speaker="{{ sermon.preacher|lower }}" 
+                         data-category="{{ sermon.series|lower }}" 
+                         data-date="{{ sermon.date|date:'Y-m-d' }}" 
+                         data-title="{{ sermon.title|lower }}"
+                         data-tags="{% for tag in sermon.tags.all %}{{ tag.name|lower }}{% if not forloop.last %},{% endif %}{% endfor %}"
+                         >
                         <div class="sermon-thumbnail">
                             {% if sermon.thumbnail %}
                                 <img src="{{ sermon.thumbnail.url }}" alt="{{ sermon.title }}" loading="lazy">
@@ -58,6 +73,11 @@
                                 <p><i class="fas fa-user"></i> {{ sermon.preacher }}</p>
                                 <p><i class="fas fa-calendar"></i> {{ sermon.date|date:"F j, Y" }}</p>
                                 {% if sermon.series %}<p><i class="fas fa-folder"></i> {{ sermon.series }}</p>{% endif %}
+                            </div>
+                            <div class="sermon-tags">
+                                {% for tag in sermon.tags.all %}
+                                    <span class="sermon-tag">{{ tag.name }}</span>
+                                {% endfor %}
                             </div>
                             <div class="sermon-actions">
                                 <a href="{{ sermon.video_url }}" class="btn" target="_blank">
