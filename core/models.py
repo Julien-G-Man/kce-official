@@ -14,8 +14,10 @@ class CorePage(models.Model):
 class Event(models.Model):
    title = models.CharField(max_length=200)
    description = models.TextField()
+   category = models.CharField(max_length=100, blank=True, help_text="e.g., 'Special Service', 'Conference', 'Youth Program'")
    date = models.DateTimeField()
    location = models.CharField(max_length=255)
+   image = models.ImageField(upload_to='event_images/', blank=True, null=True, help_text="Optional image for the event.")
 
    def __str__(self):
       return self.title

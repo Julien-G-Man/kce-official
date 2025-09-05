@@ -10,8 +10,8 @@ class CorePageAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-   list_display = ('title', 'location', 'date')
-   list_filter = ('date', 'location')
+   list_display = ('title', 'category', 'location', 'date')
+   list_filter = ('date', 'location', 'category')
    search_fields = ('title', 'description')
 
 @admin.register(Sermon)

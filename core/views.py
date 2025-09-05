@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from . import models
 from .models import CorePage, Event, Sermon, Quote
 
 # Create your views here.
@@ -20,15 +21,46 @@ def about(request):
    return render(request, 'core/about.html')
 
 def events(request):
-   all_events = Event.objects.order_by('-date')
-   return render(request, 'core/events.html', {'events': all_events})
+   events_list = Event.objects.all()
+   categories = Event.objects.order_by('category').values_list('category', flat=True).distinct().exclude(category__exact='')
+
+   # Filtering logic
+   search_query = request.GET.get('q', '')
+   if search_query:
+      events_list = events_list.filter(models.Q(title__icontains=search_query) | models.Q(description__icontains=search_query))
+
+   category_query = request.GET.get('category', '')
+   if category_query:
+      events_list = events_list.filter(category__iexact=category_query)
+
+   date_filter = request.GET.get('date_filter', 'upcoming')
+   if date_filter == 'upcoming':
+      events_list = events_list.filter(date__gte=timezone.now()).order_by('date')
+   elif date_filter == 'past':
+      events_list = events_list.filter(date__lt=timezone.now()).order_by('-date')
+
+   context = {
+      'events': events_list,
+      'categories': categories,
+   }
+   return render(request, 'core/events.html', context)
 
 def contact(request):
    return render(request, 'core/contact.html')
 
 def sermons(request):
-   all_sermons = Sermon.objects.order_by('-date')
-   return render(request, 'core/sermons.html', {'sermons': all_sermons})
+    all_sermons = Sermon.objects.order_by('-date')
+    
+    # Get unique preachers and series for the filter dropdowns
+    speakers = Sermon.objects.order_by('preacher').values_list('preacher', flat=True).distinct()
+    series = Sermon.objects.order_by('series').values_list('series', flat=True).distinct().exclude(series__isnull=True).exclude(series__exact='')
+
+    context = {
+        'sermons': all_sermons,
+        'speakers': speakers,
+        'series_list': series,
+    }
+    return render(request, 'core/sermons.html', context)
 
 def give(request):
    return render(request, 'core/give.html')

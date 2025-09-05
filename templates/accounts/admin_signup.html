@@ -1,96 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'accounts/auth_base.html' %}
 {% load static %}
 
 {% block head_extra %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f0f4f8 0%, #e0e6ef 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-        .signup-card {
-            width: 100%;
-            max-width: 500px;
-            padding: 2rem;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-        .signup-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .signup-header h1 {
-            color: #333;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .signup-header p {
-            color: #6c757d;
-        }
-        .invite-notice {
-            background: #e9effd;
-            border-left: 5px solid #667eea;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .form-control {
-            border-radius: 12px;
-            padding: 15px 20px;
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-            background-color: white;
-        }
-        .btn-signup {
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 50px;
-            padding: 14px 24px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-        }
-        .btn-signup:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-        .login-link {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-        .login-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-        .alert {
-            border-radius: 12px;
-            border: none;
-        }
-        .input-group-text {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-right: none;
-            border-radius: 12px 0 0 12px;
-            color: #6c757d;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/auth_form.css' %}">
 {% endblock %}
 
 {% block content %}

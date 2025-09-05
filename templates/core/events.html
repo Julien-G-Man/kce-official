@@ -17,19 +17,22 @@
     </header>
 
     <main class="container">
-        <div class="events-filters">
+        <form method="GET" action="{% url 'core:events' %}" class="events-filters">
             <div class="filter-group">
-                <input type="text" id="searchInput" class="filter-input" placeholder="Search events...">
-                <select id="categoryFilter" class="filter-input">
+                <input type="text" id="searchInput" name="q" class="filter-input" placeholder="Search events..." value="{{ request.GET.q }}">
+                <select id="categoryFilter" name="category" class="filter-input">
                     <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category }}" {% if request.GET.category == category %}selected{% endif %}>{{ category }}</option>
+                    {% endfor %}
                 </select>
-                <select id="dateFilter" class="filter-input">
-                    <option value="">All Dates</option>
-                    <option value="upcoming">Upcoming</option>
-                    <option value="past">Past Events</option>
+                <select id="dateFilter" name="date_filter" class="filter-input">
+                    <option value="upcoming" {% if request.GET.date_filter == 'upcoming' %}selected{% endif %}>Upcoming</option>
+                    <option value="past" {% if request.GET.date_filter == 'past' %}selected{% endif %}>Past Events</option>
                 </select>
+                <button type="submit" class="btn btn-primary">Filter</button>
             </div>
-        </div>
+        </form>
 
         <div class="view-toggle">
             <button class="active" data-view="grid">
@@ -41,10 +44,24 @@
         </div>
 
         <div class="events-grid grid grid-3">
-            <div class="loading">
-                <i class="fas fa-spinner"></i>
-                <p>Loading events...</p>
-            </div>
+            {% for event in events %}
+                <div class="card event-card">
+                    {% if event.image %}
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-thumbnail">
+                    {% endif %}
+                    <div class="card-content">
+                        <h3>{{ event.title }}</h3>
+                        <p><i class="fas fa-calendar"></i> {{ event.date|date:"F j, Y" }}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                        {# <a href="#" class="btn">View Details</a> #}
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-events">
+                    <i class="fas fa-search"></i>
+                    <p>No events found matching your criteria.</p>
+                </div>
+            {% endfor %}
         </div>
 
         <div class="calendar-view">

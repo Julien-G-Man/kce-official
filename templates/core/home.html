@@ -3,6 +3,10 @@
 
 {% block title %}Welcome | Kingdom Civilization Embassy{% endblock %}
 
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 {% block content %}
     <section class="hero responsive-hero-bg" data-fallback-bg="{% static 'img/pstansere.jpg' %}">
         <div class="container">
@@ -148,29 +152,27 @@
                   <p>There was an error processing your subscription. Please try again.</p>
                </div>
 
-               <form id="subscriptionForm" class="subscription-form">
-                     method="post"
-                     action="{% url 'members:subscribe' %}"
+               <form id="subscriptionForm" class="subscription-form" method="post" action="{% url 'members:subscribe' %}">
                   {% csrf_token %}
                   <div class="form-group">
                      <label for="subscriberName">
                         <i class="fas fa-user"></i> Full Name
                      </label>
-                     <input type="text" id="subscriberName" class="form-control" placeholder="Enter your full name" required>
+                     <input type="text" id="subscriberName" name="name" class="form-control" placeholder="Enter your full name" required>
                   </div>
 
                   <div class="form-group">
                      <label for="whatsapp">
                         <i class="fab fa-whatsapp"></i> WhatsApp Number
                      </label>
-                     <input type="tel" id="whatsapp" class="form-control" placeholder="e.g., +233 54 630 4940" required>
+                     <input type="tel" id="whatsapp" name="whatsapp" class="form-control" placeholder="e.g., +233 54 630 4940" required>
                   </div>
 
                   <div class="form-group">
                      <label for="subscriberEmail">
                         <i class="fas fa-envelope"></i> Email Address
                      </label>
-                     <input type="email" id="subscriberEmail" class="form-control" placeholder="Enter your email address" required>
+                     <input type="email" id="subscriberEmail" name="email" class="form-control" placeholder="Enter your email address" required>
                   </div>
 
                   <button type="submit" class="btn btn-primary">

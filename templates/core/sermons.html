@@ -21,57 +21,46 @@
                 <select id="speakerFilter" class="filter-input">
                     <option value="">All Speakers</option>
                     {% for speaker in speakers %}
-                        <option value="{{ speaker }}">{{ speaker }}</option>
+                        <option value="{{ speaker }}">{{ speaker|title }}</option>
                     {% endfor %}
                 </select>
                 <select id="categoryFilter" class="filter-input">
                     <option value="">All Categories</option>
-                    {% for category in categories %}
-                        <option value="{{ category }}">{{ category }}</option>
+                    {% for series_item in series_list %}
+                        <option value="{{ series_item }}">{{ series_item }}</option>
                     {% endfor %}
                 </select>
                 <select id="dateFilter" class="filter-input">
                     <option value="">Sort by Date</option>
                     <option value="latest">Latest First</option>
-                    <option value="oldest">Oldest First</option>
                 </select>
-            </div>
-            <div class="tags-filter">
-                <h4>Filter by Tags</h4>
-                <div id="tagsContainer" class="tags-container">
-                    {% for tag in all_tags %}
-                        <span class="tag">{{ tag }}</span>
-                    {% endfor %}
-                </div>
             </div>
         </div>
 
         <div class="sermons-grid grid grid-3" id="sermonsGrid">
             {% if sermons %}
                 {% for sermon in sermons %}
-                    <div class="card sermon-card" data-preview-url="{{ sermon.previewVideoUrl }}">
+                    <div class="card sermon-card" data-preview-url="{{ sermon.video_url }}">
                         <div class="sermon-thumbnail">
-                            <img src="{{ sermon.thumbnail }}" alt="{{ sermon.title }}" loading="lazy">
+                            {% if sermon.thumbnail %}
+                                <img src="{{ sermon.thumbnail.url }}" alt="{{ sermon.title }}" loading="lazy">
+                            {% else %}
+                                <img src="{% static 'img/year_of_dominion.jpg' %}" alt="Default Sermon Thumbnail" loading="lazy">
+                            {% endif %}
                             <div class="sermon-play">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
                         <div class="sermon-info">
                             <h3>{{ sermon.title }}</h3>
+                            {% if sermon.subtitle %}<h6>{{ sermon.subtitle }}</h6>{% endif %}
                             <div class="sermon-meta">
-                                <p><i class="fas fa-user"></i> {{ sermon.speaker }}</p>
+                                <p><i class="fas fa-user"></i> {{ sermon.preacher }}</p>
                                 <p><i class="fas fa-calendar"></i> {{ sermon.date|date:"F j, Y" }}</p>
-                                <p><i class="fas fa-folder"></i> {{ sermon.category }}</p>
+                                {% if sermon.series %}<p><i class="fas fa-folder"></i> {{ sermon.series }}</p>{% endif %}
                             </div>
-                            {% if sermon.tags %}
-                                <div class="sermon-tags">
-                                    {% for tag in sermon.tags %}
-                                        <span class="sermon-tag">{{ tag }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
                             <div class="sermon-actions">
-                                <a href="{{ sermon.fullVideoUrl }}" class="btn" target="_blank">
+                                <a href="{{ sermon.video_url }}" class="btn" target="_blank">
                                     <i class="fas fa-play-circle"></i> Watch Full Sermon
                                 </a>
                             </div>
