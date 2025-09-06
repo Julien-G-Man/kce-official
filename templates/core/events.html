@@ -47,7 +47,11 @@
             {% for event in events %}
                 <div class="event-card">
                     <div style="position: relative;">
-                        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image" loading="lazy">
+                        {% if event.imgae %}
+                            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image" loading="lazy">
+                        {% else %} 
+                            <img src="{% static 'img/placeholder.png' %}" alt="Placeholder Image" class="event-image" loading="lazy">
+                        {% endif %}
                         <div class="event-date">
                             {{ event.date|date:"M j, Y" }}
                         </div>
