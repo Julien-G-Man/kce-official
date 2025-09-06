@@ -1,17 +1,54 @@
 /* contact.css */
 
+/* The :root block has been removed as values are inherited from base.css */
+
+/* General body and container styles */
+/* These rules are kept to prevent conflicts if base.css doesn't include them, but can be removed if they are redundant. */
+body {
+    background-color: var(--surface-light);
+    color: var(--text-primary);
+    line-height: 1.7; /* Using value from base.css */
+    font-family: var(--font-body); /* Using variable from base.css */
+}
+
+.container {
+    max-width: 1280px; /* Using value from base.css */
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg); /* Using value from base.css */
+}
+
+.text-center {
+    text-align: center;
+}
+
 /* Header section styles with gradient background */
 .contact-header {
     background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
     color: white;
-    padding: calc(64px + var(--spacing-md)) 0 var(--spacing-md) 0;
+    /* This padding-top is crucial to push the content below the fixed navigation bar */
+    /* padding-top: 150px; 
+    padding-bottom: var(--spacing-md); */
+    padding: calc(64px + var(--spacing-xl)) 0 var(--spacing-xl) 0;
     margin-bottom: var(--spacing-md);
 }
 
 /* Typography styles for header */
-.contact-header h1, .contact-header p {
-    font-family: 'Georgia', serif;
+.contact-header h1 {
+    /* Using variables from base.css for font consistency */
+    font-family: 'Gerogia', serif;
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
 }
+
+.contact-header p {
+    font-family: 'Georgia', serif;
+    font-size: var(--text-base);
+    max-width: 600px;
+    margin: 0 auto;
+    color: white; /* Changed to white for visibility on the dark background */
+}
+
 
 /* Google Maps container styles */
 .map-container {
@@ -40,10 +77,10 @@
 /* Contact information card styles */
 .contact-info {
     background: var(--surface);
-    padding: var(--spacing-md);
+    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    font-size: 0.97rem;
+    font-size: var(--text-base);
 }
 
 /* Individual contact item styles */
@@ -70,10 +107,10 @@
 /* Contact form card styles */
 .contact-form {
     background: var(--surface);
-    padding: var(--spacing-md);
+    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    font-size: 0.97rem;
+    font-size: var(--text-base);
 }
 
 /* Form group container styles */
@@ -92,46 +129,28 @@
 .form-control {
     width: 100%;
     padding: 0.6rem 0.8rem;
-    border: 1px solid var(--text-secondary);
+    border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    font-size: 0.97rem;
+    font-size: var(--text-base);
     transition: border-color var(--transition-fast);
     min-height: 36px;
+    color: var(--text-primary);
 }
 
 /* Form input focus state */
 .form-control:focus {
     outline: none;
     border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.25);
 }
 
 /* Textarea specific styles */
 textarea.form-control {
     min-height: 150px;
     padding: var(--spacing-md);
-    font-size: 1rem;
+    font-size: var(--text-base);
 }
 
-/* Social media links container styles */
-.social-links {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-}
-
-/* Individual social media link styles */
-.social-link {
-    width: 40px;
-    height: 40px;
-    background: var(--background);
-    color: var(--text-secondary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: all var(--transition-fast);
-}
 
 /* Social media link hover effect */
 .social-link:hover {
@@ -164,44 +183,48 @@ textarea.form-control {
 
 /* Contact form button styles */
 .contact-form .btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.97rem;
-    min-height: 38px;
+    width: 100%;
+    /* using padding from base.css */
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--text-base);
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+/* Specific styling for the primary button */
+.contact-form .btn-primary {
+    background: var(--gradient-warm);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+}
+
+.contact-form .btn:hover {
+    background-color: var(--primary-light);
 }
 
 /* Responsive styles for mobile devices */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .contact-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Adjustments for contact section headings on tablet */
-    .contact-info h2 {
-        font-size: 1.8rem; /* Slightly smaller for tablets */
+    .contact-info,
+    .contact-form {
+        padding: var(--spacing-md);
     }
 }
 
-@media (max-width: 480px) {
-    /* Adjustments for contact section headings on mobile */
-    .contact-info h2 {
-        font-size: 1.5rem; /* Further reduced for smaller mobile screens */
+@media (max-width: 768px) {
+    .contact-header h1 {
+        font-size: var(--text-2xl);
     }
-
-    /* Adjustments for form controls on mobile */
-    .form-control {
-        padding: var(--spacing-xs) var(--spacing-sm); /* Further reduced vertical padding */
-    }
-
-    /* Adjustments for contact form button on mobile */
-    .contact-form .btn {
-        padding: 0.6rem 1rem; /* Reduced padding */
-        font-size: 0.9rem; /* Slightly smaller font size */
-        width: 100%; /* Ensure it still takes full width */
-    }
-
-    /* Reduce padding for contact info and form cards on mobile for better fit */
-    .contact-info,
-    .contact-form {
-        padding: var(--spacing-sm); /* Further reduced to 1rem (16px) to match container padding */
+    
+    .contact-info h2, .contact-form h2 {
+        font-size: var(--text-xl);
     }
 }

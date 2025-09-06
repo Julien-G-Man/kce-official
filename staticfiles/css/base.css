@@ -1,22 +1,22 @@
 :root {
     /* Warm, friendly color palette */
-    --primary: #ff6b35;
-    --primary-light: #ff8c59;
-    --primary-dark: #e55a2b;
-    --secondary: #ffa726;
+    --primary: #1e3a8a;
+    --primary-light: #3b82f6;
+    --primary-dark: #152b67;
+    --secondary: #2f5fcf;
     --accent: #4ade80;
     --accent-dark: #22c55e;
     --surface: #ffffff;
     --surface-light: #fffbf5;
     --surface-warm: #fef7ed;
     --surface-soft: #f9f5f0;
-    --text-primary: #2d3748;
-    --text-secondary: #4a5568;
+    --text-primary: #152b67;
+    --text-secondary: #1e3a8a;
     --text-light: #718096;
     --text-warm: #744210;
     --border: #e2e8f0;
-    --border-warm: #fed7aa;
-    --shadow: rgba(255, 107, 53, 0.15);
+    --border-warm: #8eb9ff;
+    --shadow: rgb(10, 18, 61);
     --shadow-soft: rgba(0, 0, 0, 0.08);
     --shadow-lg: rgba(255, 107, 53, 0.25);
     --gradient-warm: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -223,6 +223,19 @@ p {
     background: rgba(255, 107, 53, 0.1);
 }
 
+/* New CSS to animate the hamburger button when the nav is open */
+.nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 @media (min-width: 768px) {
     .nav-toggle {
         display: none;
@@ -235,6 +248,38 @@ p {
     background: var(--primary);
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast);
+}
+
+/* --- New Section for Mobile Menu Active State --- */
+@media (max-width: 767px) {
+    .nav-menu.open {
+        display: flex; /* Show the menu on mobile when the 'open' class is added */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Position it right below the navbar */
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        box-shadow: var(--shadow-md);
+        padding: var(--spacing-lg);
+        border-bottom-left-radius: var(--radius-xl);
+        border-bottom-right-radius: var(--radius-xl);
+        animation: slideDown 0.3s ease-out; /* Add a nice animation */
+        gap: var(--spacing-md);
+    }
+}
+
+/* Keyframe animation to slide the menu down */
+@keyframes slideDown {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Enhanced Sections */
@@ -587,18 +632,20 @@ p {
 }
 
 .social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 107, 53, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
-    background: rgba(255, 107, 53, 0.2);
-    border-radius: var(--radius-lg);
+    font-size: 1.2rem;
+    border-radius: 50%;
     color: white;
     text-decoration: none;
     transition: all var(--transition-fast);
     border: 2px solid transparent;
 }
+
 
 .social-links a:hover {
     background: var(--primary);

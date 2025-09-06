@@ -3,8 +3,8 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.85) 0%, rgba(255, 171, 38, 0.75) 100%),
+    justify-content: center;             /*#1e3a8a*/
+    background: linear-gradient(135deg, rgba(11, 42, 168, 0.85) 0%, rgba(49, 85, 227, 0.85) 100%),
                 url('static/img/pstansere.jpg') center/cover;
     background-attachment: fixed;
     position: relative;
@@ -88,7 +88,7 @@
 .hero-text h5 {
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: #fde68a;
+    color: #3b82f6;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 

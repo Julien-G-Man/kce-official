@@ -40,6 +40,27 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.animation = 'none';
         });
     });
+
+    // --- Add this new section to handle the mobile menu ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    // Check if the elements exist before adding a listener
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            navToggle.classList.toggle('open');
+        });
+
+        // Optional: Close the mobile menu when a menu item is clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                navToggle.classList.remove('open');
+            });
+        });
+    }
 });
 
 // Add pulse animation
