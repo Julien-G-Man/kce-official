@@ -223,6 +223,12 @@
     color: var(--primary);
 }
 
+/* May not be needed. Just for testing till it works */
+.text-center {
+    text-align: center;
+    color: var(--primary-dark);
+}
+
 /* Enhanced Friendly Subscription Section */
 .subscription-section {
     background: linear-gradient(135deg, var(--surface-warm) 0%, var(--surface-light) 100%);
@@ -265,7 +271,7 @@
 }
 
 .subscription-form .form-group {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .subscription-form label {
@@ -278,54 +284,61 @@
 
 .subscription-form .form-control {
     width: 100%;
-    padding: var(--spacing-lg) var(--spacing-xl);
-    border: 2px solid var(--border-warm);
-    border-radius: var(--radius-lg);
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     font-size: var(--text-base);
     transition: all var(--transition-fast);
     background: var(--surface);
     font-family: var(--font-body);
     font-weight: 400;
+    min-height: 36px;
 }
 
 .subscription-form .form-control:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.25);
     transform: translateY(-2px);
+}
+
+textarea.subscription-form .form-control {
+    min-height: 150px;
+    padding: var(--spacing-md);
+    font-size: var(--text-base);
 }
 
 .subscription-form .btn {
     width: 100%;
     margin-top: var(--spacing-xl);
-    padding: var(--spacing-xl);
-    font-size: var(--text-lg);
+    padding: 0.6rem 0.8rem;
+    font-size: var(--text-base);
     font-weight: 700;
 }
 
 .form-success, .form-error {
     text-align: center;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
     margin-bottom: var(--spacing-lg);
     border: 2px solid;
 }
 
 .form-success {
-    background: rgba(74, 222, 128, 0.15);
-    color: var(--accent-dark);
-    border-color: var(--accent);
+    background: var(--success);
+    color: var(--surface);
+    border-color: transparent;
 }
 
 .form-error {
-    background: rgba(239, 68, 68, 0.15);
+    background: var(--danger);
     color: #dc2626;
-    border-color: #dc2626;
+    border-color: transparent;
 }
 
 .form-success i, .form-error i {
     font-size: var(--text-3xl);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sd);
     display: block;
 }
 
@@ -397,7 +410,8 @@
     color: white;
     backdrop-filter: blur(10px);
     font-weight: 600;
-    padding: var(--spacing-lg) var(--spacing-2xl);
+    padding: 0.6rem 0.8rem;
+    font-size: var(--text-base);
 }
 
 .cta-buttons .btn:hover {

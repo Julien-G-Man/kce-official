@@ -715,3 +715,16 @@ img[loading="lazy"].loaded {
     outline: 3px solid var(--primary);
     outline-offset: 2px;
 }
+
+/* Button with a soft, transparent background. */
+.btn-soft {
+    background-color: var(--primary);
+    color: white; /* Ensures the text is readable */
+    border: 1px solid var(--primary-dark);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-soft:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
