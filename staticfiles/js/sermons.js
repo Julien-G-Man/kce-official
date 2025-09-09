@@ -1,4 +1,5 @@
-// sermons.js - Refactored for the grid layout with modal functionality
+// This console.log should appear as soon as the file loads.
+console.log('sermons.js is running!');
 
 document.addEventListener('DOMContentLoaded', () => {
     const dbg = (...args) => console.debug('[sermons.js]', ...args);
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.querySelector('.close-modal');
 
     // --- Helper Functions ---
+    // These are now included directly in this file
     function getYouTubeId(url) {
         if (!url) return null;
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -122,8 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
             playBtn.addEventListener('click', () => {
                 const embedUrl = card.dataset.embedUrl;
                 
+                // --- DEBUGGING LINES ---
                 console.log('Embed URL:', embedUrl);
                 console.log('Video Frame Element:', videoFrame);
+                // --- END DEBUGGING LINES ---
 
                 if (embedUrl) {
                     if (videoFrame) {

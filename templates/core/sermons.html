@@ -38,69 +38,68 @@
                     <option value="oldest">Oldest First</option>
                 </select>
             </div>
+
             <div class="tags-filter">
                 <h4>Filter by Tags</h4>
-                <div id="tagsContainer" class="tags-container">
-                    </div>
+                <div id="tagsContainer" class="tags-container"></div>
             </div>
         </div>
 
-        <div class="sermons-grid grid grid-3" id="sermonsGrid">
+        <section class="sermons-grid">
             {% if sermons %}
-                {% for sermon in sermons %}
-                    <div class="card sermon-card" 
-                         data-preview-url="{{ sermon.video_url }}" 
-                         data-speaker="{{ sermon.preacher|lower }}" 
-                         data-category="{{ sermon.series|lower }}" 
-                         data-date="{{ sermon.date|date:'Y-m-d' }}" 
-                         data-title="{{ sermon.title|lower }}"
-                         data-tags="{% for tag in sermon.tags.all %}{{ tag.name|lower }}{% if not forloop.last %},{% endif %}{% endfor %}"
-                         >
-                        <div class="sermon-thumbnail">
-                            {% if sermon.thumbnail %}
-                                <img src="{{ sermon.thumbnail.url }}" alt="{{ sermon.title }}" loading="lazy">
-                            {% else %}
-                                <img src="{% static 'img/year_of_dominion.jpg' %}" alt="Default Sermon Thumbnail" loading="lazy">
+                {% for s in sermons %}
+                    <div class="sermon-card"
+                         {% if s.highlight_embed %}
+                             data-embed-url="{{ s.highlight_embed}}" 
+                         {% endif %}
+                         
+                         data-video-url="{{ s.video_url }}"
+                         data-title="{{ s.title }}"
+                         data-preacher="{{ s.preacher }}"
+                         data-date="{{ s.date|date:'F j, Y' }}"
+                         data-series="{{ s.series }}"
+                         data-tags="{% for tag in s.tags.all %}{{ tag.name|lower }}{% if not forloop.last %},{% endif %}{% endfor %}">
+
+                        <div class="sermon-thumbnail-container play-btn">
+                            {% if s.get_highlight_id %}
+                                <img src="https://img.youtube.com/vi/{{ s.get_highlight_id|cut:'https://www.youtube.com/embed/' }}/hqdefault.jpg" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
+                            {% elif s.thumbnail %}
+                                <img src="{{ s.thumbnail.url }}" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
+                            {% else %}    
+                                <img src="{% static 'img/white_suit.jpg' %}" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
                             {% endif %}
-                            <div class="sermon-play">
-                                <i class="fas fa-play"></i>
-                            </div>
+                            <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
                         </div>
+
                         <div class="sermon-info">
-                            <h3>{{ sermon.title }}</h3>
-                            {% if sermon.subtitle %}<h6>{{ sermon.subtitle }}</h6>{% endif %}
-                            <div class="sermon-meta">
-                                <p><i class="fas fa-user"></i> {{ sermon.preacher }}</p>
-                                <p><i class="fas fa-calendar"></i> {{ sermon.date|date:"F j, Y" }}</p>
-                                {% if sermon.series %}<p><i class="fas fa-folder"></i> {{ sermon.series }}</p>{% endif %}
-                            </div>
-                            <div class="sermon-tags">
-                                {% for tag in sermon.tags.all %}
-                                    <span class="sermon-tag">{{ tag.name }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="sermon-actions">
-                                <a href="{{ sermon.video_url }}" class="btn" target="_blank">
-                                    <i class="fas fa-play-circle"></i> Watch Full Sermon
+                            <h4 class="sermon-title">{{ s.title }}</h4>
+                            <p class="sermon-preacher">{{ s.preacher }}</p>
+                            <p class="sermon-date">{{ s.date|date:"F j, Y" }}</p>
+                            {% if s.video_url %}
+                                <a href="{{ s.video_url }}" class="btn btn-primary watch-full-btn" target="_blank" rel="noopener">
+                                    <i class="fas fa-external-link-alt"></i> Watch Full Sermon
                                 </a>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
             {% else %}
                 <div class="no-sermons">
                     <i class="fas fa-search"></i>
-                    <p>No sermons found matching your criteria.</p>
+                    <p>No sermons available.</p>
                 </div>
             {% endif %}
-        </div>
+        </section>
     </main>
 
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="video-container">
-                <iframe id="videoFrame" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                <iframe id="videoFrame" width="100%" height="100%" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
             </div>
         </div>
     </div>
