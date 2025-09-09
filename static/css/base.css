@@ -483,6 +483,7 @@ p {
 }
 
 .sermon-thumbnail {
+    object-fit: cover;
     width: 100%;
     height: 220px;
     object-fit: cover;
@@ -688,10 +689,6 @@ html {
 /* Loading animation for images */
 img {
     transition: opacity var(--transition-normal);
-}
-
-img[loading="lazy"] {
-    opacity: 0;
 }
 
 img[loading="lazy"].loaded {

@@ -62,10 +62,10 @@
 
                         <div class="sermon-thumbnail-container play-btn">
                             {% if s.get_highlight_id %}
-                                <img src="https://img.youtube.com/vi/{{ s.get_highlight_id|cut:'https://www.youtube.com/embed/' }}/hqdefault.jpg" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
+                                <img src="https://img.youtube.com/vi/{{ s.get_highlight_id }}/hqdefault.jpg" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
                             {% elif s.thumbnail %}
                                 <img src="{{ s.thumbnail.url }}" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
-                            {% else %}    
+                            {% else %}     
                                 <img src="{% static 'img/white_suit.jpg' %}" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
                             {% endif %}
                             <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
