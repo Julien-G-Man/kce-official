@@ -24,13 +24,14 @@ class Event(models.Model):
    def __str__(self):
       return self.title   
 
+# Sermons -Videos in Sermons Page
 class Sermon(models.Model):
    title = models.CharField(max_length=200)
    subtitle = models.CharField(max_length=200, blank=True, null=True)
    preacher = models.CharField(max_length=100)
    series = models.CharField(max_length=200, blank=True, null=True)
    date = models.DateField()
-   highlight_url = models.URLField(blank=True, null=True) # Shirt clip in website
+   highlight_url = models.URLField(blank=True, null=True)  # Short clip in website
    video_url = models.URLField(blank=True, null=True)     # full video in YouTube
    thumbnail = models.ImageField(upload_to='sermon_thumbnails/', blank=True, null=True)
 
@@ -40,18 +41,34 @@ class Sermon(models.Model):
    @property
    def highlight_embed(self):
       """
-      Convert a YouTube watch URL into an embeddable one.
-      Example: https://www.youtube.com/watch?v=abc123 → https://www.youtube.com/embed/abc123
+      Convert a YouTube highlight URL (including Shorts) into an embeddable URL.
       """
-      if self.highlight_url and "youtube.com" in self.highlight_url:
-         url_data = urlparse(self.highlight_url)
-         query = parse_qs(url_data.query)
-         video_id = query.get("v")
-         if video_id:
-            return f"https://www.youtube.com/embed/{video_id[0]}"
-      if self.highlight_url and "youtu.be" in self.highlight_url:
-         video_id = self.highlight_url.split("/")[-1]
+      if not self.highlight_url:
+         return None
+
+      # Extract video ID from any YouTube URL type
+      parsed_url = urlparse(self.highlight_url)
+      video_id = None
+        
+      # Handle standard URLs
+      if parsed_url.hostname in ["www.youtube.com", "youtube.com", "m.youtube.com"]:
+         # Check for a "v" query parameter (standard video)
+         query = parse_qs(parsed_url.query)
+         video_id = query.get("v", [None])[0]
+         if not video_id:
+            # Check for a Shorts URL in the path
+            path_parts = parsed_url.path.strip("/").split("/")
+            if "shorts" in path_parts and len(path_parts) > path_parts.index("shorts") + 1:
+               video_id = path_parts[path_parts.index("shorts") + 1]
+        
+      # Handle youtu.be URLs
+      elif parsed_url.hostname in ["youtu.be", "www.youtu.be"]:
+         video_id = parsed_url.path.strip("/")
+
+      # Construct the embed URL if a valid video ID was found
+      if video_id:
          return f"https://www.youtube.com/embed/{video_id}"
+            
       return None
 
    def get_youtube_id(self):
@@ -75,13 +92,28 @@ class Sermon(models.Model):
       """Extracts the YouTube video ID from the highlight URL"""
       if not self.highlight_url:
          return None
+        
+      # Extract video ID from any YouTube URL type
       parsed_url = urlparse(self.highlight_url)
+      video_id = None
+        
+      # Handle standard URLs
       if parsed_url.hostname in ["www.youtube.com", "youtube.com", "m.youtube.com"]:
-         return parse_qs(parsed_url.query).get("v", [None])[0]
+         # Check for a "v" query parameter (standard video)
+         query = parse_qs(parsed_url.query)
+         video_id = query.get("v", [None])[0]
+         if not video_id:
+            # Check for a Shorts URL in the path
+            path_parts = parsed_url.path.strip("/").split("/")
+            if "shorts" in path_parts and len(path_parts) > path_parts.index("shorts") + 1:
+               video_id = path_parts[path_parts.index("shorts") + 1]
+        
+      # Handle youtu.be URLs
       elif parsed_url.hostname in ["youtu.be", "www.youtu.be"]:
-         return parsed_url.path.strip("/")
-      return None
+         video_id = parsed_url.path.strip("/")
 
+      return video_id
+     
 class Quote(models.Model):
    text = models.TextField()
    author = models.CharField(max_length=100, blank=True)
