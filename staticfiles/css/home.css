@@ -22,6 +22,15 @@
     opacity: 0.9; /* Add a slight transparency to make text stand out */
 }
 
+/* Media Query for Landscape and Desktop Views */
+@media (min-aspect-ratio: 1/1) { /* Applies to wide screens, i.e., laptops, desktops, and landscape tablets */
+    .hero-background-image {
+        background-position: 50% 10%; /* Adjust this value to get the best position for the face */
+        /* The first value is the horizontal position (50% is center) and the second is the vertical position. */
+        /* A smaller percentage like 10% or 15% will move the image up, revealing more of the top. */
+    }
+}
+
 /* Add an overlay to the image for better text readability */
 .hero-background-image::after {
     content: '';
@@ -114,11 +123,6 @@
     border-radius: var(--radius-xl);
     margin-bottom: var(--spacing-xl);
     border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.welcome-badge i {
-    color: var(--primary);
-    font-size: var(--text-lg);
 }
 
 .welcome-badge span {
