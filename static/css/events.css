@@ -12,8 +12,14 @@
 }
 
 /* Typography styles for header */
-.events-header h1, .events-header p {
+.events-header h1 {
+  font-weight: 800;  
+  font-family: 'Georgia', serif;
+  color: var(--surface);
+} 
+.events-header p {
     font-family: 'Georgia', serif;
+    color: var(--surface);
 }
 
 /* Event filters container styles */

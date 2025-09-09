@@ -664,7 +664,7 @@ p {
     margin-top: var(--spacing-2xl);
     padding-top: var(--spacing-xl);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #a0aec0;
+    color: var(--surface);
 }
 
 /* Enhanced Mobile Responsiveness */

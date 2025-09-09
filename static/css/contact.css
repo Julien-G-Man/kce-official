@@ -39,6 +39,7 @@ body {
     font-size: var(--text-4xl);
     font-weight: 800;
     margin-bottom: var(--spacing-md);
+    color: var(--surface);
 }
 
 .contact-header p {
@@ -46,7 +47,7 @@ body {
     font-size: var(--text-base);
     max-width: 600px;
     margin: 0 auto;
-    color: white; /* Changed to white for visibility on the dark background */
+    color: var(--surface); /* Changed to white for visibility on the dark background */
 }
 
 

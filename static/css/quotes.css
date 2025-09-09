@@ -11,6 +11,7 @@
 /* Typography styles for header */
 .quotes-header h1, .quotes-header p {
     font-family: 'Georgia', serif;
+    color: var(--surface);
 }
 
 /* Quote card styles */
