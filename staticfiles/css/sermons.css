@@ -1,207 +1,225 @@
-/* Sermons Page Specific Styles */
+/*
+ * Sermons Page Styles
+ *
+ * This file contains the styles for the Sermons page, focusing on a
+ * responsive grid layout for video cards inspired by YouTube.
+ * It also includes styles for the filters and modal.
+ *
+ */
 
-/* Header section styles with gradient background */
-.sermons-header {
-    background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
-    color: white;
-    padding: calc(64px + var(--spacing-xl)) 0 var(--spacing-xl) 0;
-    margin-bottom: var(--spacing-xl);
+/* General Styles */
+body {
+    background: var(--background);
+    color: var(--text-primary);
 }
 
-/* Typography styles for header */
-.sermons-header h1, .sermons-header p {
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.sermons-header {
+    background: linear-gradient(to top, var(--primary) 0%, var(--primary-light) 100%);
+    padding: var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.sermons-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--surface);
     font-family: 'Georgia', serif;
 }
 
-/* Sermon filters container styles */
+.sermons-header p {
+    font-size: 1.1rem;
+    color: var(--surface);
+    font-family: 'Georgia', serif;
+}
+
+/* --- */
+
+/* Sermons Filters */
 .sermons-filters {
-    background: var(--surface);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-lg);
     margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: var(--surface);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
 }
 
-/* Filter controls container styles */
+.sermons-filters h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.2rem;
+}
+
 .filter-group {
-    display: flex;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-/* Filter input field styles */
-.filter-input {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid var(--text-secondary);
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    min-width: 200px;
-}
-
-/* Sermon card container styles */
-.sermon-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-/* Sermon thumbnail container styles */
-.sermon-thumbnail {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-md);
-    aspect-ratio: 16/9;
-}
-
-/* Sermon thumbnail image styles */
-.sermon-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-/* Sermon thumbnail hover effect */
-.sermon-card:hover .sermon-thumbnail img {
-    transform: scale(1.05);
-}
-
-/* Play button overlay styles */
-.sermon-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.7);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-}
-
-/* Play button hover effect */
-.sermon-card:hover .sermon-play {
-    opacity: 1;
-}
-
-/* Play button icon styles */
-.sermon-play i {
-    color: white;
-    font-size: 1.5rem;
-}
-
-/* Sermon information container styles */
-.sermon-info {
-    padding: var(--spacing-md);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Sermon metadata styles */
-.sermon-meta {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: var(--spacing-sm);
-}
-
-/* Sermon metadata icon styles */
-.sermon-meta i {
-    margin-right: var(--spacing-xs);
-}
-
-/* Sermon action buttons container styles */
-.sermon-actions {
-    margin-top: auto;
-    padding-top: var(--spacing-md);
-}
-
-/* Loading indicator styles */
-.loading {
-    text-align: center;
-    padding: var(--spacing-xl);
-    color: var(--text-secondary);
-}
-
-/* Loading spinner animation */
-.loading i {
-    font-size: 2rem;
-    animation: spin 1s linear infinite;
-}
-
-/* Loading spinner keyframes */
-@keyframes spin {
-    100% { transform: rotate(360deg); }
-}
-
-/* No sermons message styles */
-.no-sermons {
-    text-align: center;
-    padding: var(--spacing-xl);
-    color: var(--text-secondary);
-}
-
-/* Tags filter container styles */
-.tags-filter {
-    margin-top: var(--spacing-md);
-}
-
-/* Tags container styles */
-.tags-container {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
 }
 
-/* Individual tag styles */
-.tag {
-    background: var(--background);
-    padding: var(--spacing-xs) var(--spacing-sm);
+.filter-input {
+    flex: 1;
+    min-width: 150px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    border: 1px solid var(--text-secondary);
+    background: var(--background);
+    color: var(--text-primary);
 }
 
-/* Tag hover effect */
-.tag:hover {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+.tags-filter {
+    margin-top: var(--spacing-md);
 }
 
-/* Active tag styles */
-.tag.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-/* Sermon tags container styles */
-.sermon-tags {
+.tags-container {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-xs);
-    margin-top: var(--spacing-sm);
+    gap: 8px;
 }
 
-/* Individual sermon tag styles */
-.sermon-tag {
+.tag-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
     background: var(--background);
-    padding: 2px var(--spacing-sm);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
     color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-/* Modal styles */
+.tag-btn.active {
+    background: var(--primary-color);
+    color: var(--on-primary);
+    border-color: var(--primary-color);
+}
+
+/* --- */
+
+/* Sermons Grid Layout */
+.sermons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.sermon-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.sermon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Thumbnail Styling with 16:9 Aspect Ratio */
+.sermon-thumbnail-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* This sets a 16:9 aspect ratio */
+    overflow: hidden;
+    background: #000;
+    cursor: pointer;
+}
+
+.sermon-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sermon-thumbnail-container:hover .play-overlay {
+    opacity: 1;
+}
+
+.play-overlay i {
+    font-size: 3rem;
+    color: white;
+}
+
+/* Information Styling */
+.sermon-info {
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sermon-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.sermon-preacher,
+.sermon-date {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.no-sermons {
+    text-align: center;
+    padding: var(--spacing-xl);
+    grid-column: 1 / -1; /* This makes the "No sermons" message span the whole grid */
+}
+
+/* Watch Full Sermon Button */
+.watch-full-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--primary-dark);
+    color: var(--surface);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: var(--spacing-sm);
+    transition: background 0.2s;
+}
+
+.watch-full-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* --- */
+
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -239,7 +257,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%;
 }
 
 .video-container iframe {
@@ -248,4 +266,13 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+/* --- */
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .sermons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
 }

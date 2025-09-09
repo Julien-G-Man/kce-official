@@ -10,6 +10,7 @@
 
 /* Typography styles for header */
 .about-header h1, .about-header p {
+    color: var(--surface);
     font-family: 'Georgia', serif;
 }
 
