@@ -229,3 +229,24 @@ textarea.form-control {
         font-size: var(--text-xl);
     }
 }
+
+.form-alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-success {
+    color: green;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.form-error {
+    color: red;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}

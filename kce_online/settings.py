@@ -130,4 +130,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Logins
 LOGIN_URL = "/accounts/login/" # change to a named URL like 'accounts:login' once implemented
 LOGIN_REDIRECT_URL = "core:home"
-LOGOUT_REDIRECT_URL = "core:home"
+LOGOUT_REDIRECT_URL = "core:home"# settings.py
+
+# Email Configuration
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT')) # Convert to an integer
+EMAIL_USE_TLS = False # os.getenv('EMAIL_USE_TLS').lower() == 'true' # Convert to a boolean
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+CONTACT_FORM_RECEIVER_EMAIL = os.getenv('CONTACT_FORM_RECEIVER_EMAIL')
