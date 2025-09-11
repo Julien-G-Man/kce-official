@@ -47,6 +47,7 @@ body {
     background: var(--surface);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    color: grey;
 }
 
 .sermons-filters h3 {
@@ -65,7 +66,7 @@ body {
     flex: 1;
     min-width: 150px;
     padding: 8px 12px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--text-secondary);
     border-radius: var(--radius-sm);
     background: var(--background);
     color: var(--text-primary);

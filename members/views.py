@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from .forms import NewsletterForm, ContactForm
 from core.views import contact as core_contact
-from .utils import send_contact_email
+from .utils import send_contact_email, send_contact_response_email
 
 
 def member_list(request):
@@ -34,6 +34,9 @@ def contact_submit(request):
          form.save() 
          # send email
          send_contact_email(name, email, phone, subject, message)
+         
+         # Send automated response to the user who filled the form
+         send_contact_response_email(name, email, message)
          
          return JsonResponse({"success": True, "message": "Your message has been sent successfully! We'll be in touch soon."}, status=200)
       else:

@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             formSuccess.style.display = 'none';
             formError.style.display = 'none';
 
-            // Corrected code: Use the new FormData API
+            // new FormData API
+            // This line gathers all data from the form
             const formData = new FormData(contactForm);
             
             submitBtn.disabled = true;
