@@ -18,9 +18,9 @@ def get_env_variable(var_name: str) -> str:
 SECRET_KEY = get_env_variable("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["kceonline.onrender.com", "localhost", "127.0.0.1"]
 
 # Application definition
 

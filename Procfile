@@ -1,0 +1,1 @@
+web: gunicorn kce_online.wsgi:application
