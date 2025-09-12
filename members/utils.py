@@ -75,9 +75,10 @@ def send_contact_response_email(name, email, message):
         html_message = render_to_string('emails/contact_response_email.html', context)
         plain_message = (
             f"Shalom shalom {name},\n\n"
-            f"Thank you for your message. We have received it and will get back to you shortly.\n\n"
+            f"Thank you for contacting us. This is a confirmation that we have received your message. We appreciate you reaching out and will get back to you as soon as possible.\n\n"
             f"Your message was:\n{message}\n\n"
-            f"Have a shalom day!,\n"
+            f"If you have any urgent inquiries, please feel free to call us directly at (+233)054 630 4940. \n\n"
+            f"Have a shalom day!\n"
         )
         
         ssl_context = ssl.create_default_context(cafile=certifi.where())
@@ -103,3 +104,37 @@ def send_contact_response_email(name, email, message):
             print("User response email sent successfully!")
     except Exception as e:
         print(f"Error sending user response email: {e}")        
+        
+
+def send_newsletter_welcome_email(name, email):
+    try:
+        full_subject = "Welcome to the KCE Family!"
+        context = {'name': name}
+        html_message = render_to_string('emails/newsletter_welcome.html', context)
+        plain_message = (
+            f"Hello {name},\n\n"
+            f"Thank you for subscribing to our newsletters. We're excited to have you as part of our community and will be sharing updates about our upcoming events, sermons, and spiritual growth opportunities.\n\n"
+            f"Best regards,\n"
+            f"Kingdom Civilization Embassy Team"
+        )
+        ssl_context = ssl.create_default_context(cafile=certifi.where())
+        with get_connection(
+            host=settings.EMAIL_HOST,
+            port=settings.EMAIL_PORT,
+            username=settings.EMAIL_HOST_USER,
+            password=settings.EMAIL_HOST_PASSWORD,
+            use_tls=settings.EMAIL_USE_TLS,
+            ssl_context=ssl_context
+        ) as connection:
+            email_obj = EmailMessage(
+                full_subject,
+                plain_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                connection=connection
+            )
+            email_obj.content_subtype = "html"
+            email_obj.body = html_message
+            email_obj.send()
+    except Exception as e:
+        print(f"Error sending newsletter welcome email: {e}")        

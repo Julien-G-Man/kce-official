@@ -3,19 +3,29 @@ from django.contrib import messages
 from django.http import JsonResponse
 from .forms import NewsletterForm, ContactForm
 from core.views import contact as core_contact
-from .utils import send_contact_email, send_contact_response_email
-
+from .utils import send_contact_email, send_contact_response_email, send_newsletter_welcome_email
+import json
 
 def member_list(request):
    return render(request, "member_list")
 
-def newsletter_signup(request):
+def newsletter_subscription(request):
    if request.method == "POST":
-      form = NewsletterForm(request.POST)
-      if form.is_valid():
-         form.save()
-         return JsonResponse({"success": True, "message": "Welcome to our family!"})
-      return JsonResponse({"success": False, "errors": form.errors}, status=400)
+      try:
+         data =  json.loads(request.body) 
+         form = NewsletterForm(data)
+         if form.is_valid():
+            
+            # save new subscriber in database
+            subscription = form.save()
+            # send ew subscriptin email
+            send_newsletter_welcome_email(subscription.name, subscription.email)
+            
+            return JsonResponse({"success": True, "message": "Welcome to our family!"})
+         else:
+            return JsonResponse({"success": False, "errors": form.errors}, status=400)
+      except    json.JSONDecodeError:   
+         return JsonResponse({"success": False, "message":  "Invalid JSON"}, status=400)
 
    return JsonResponse({"success": False, "message": "Invalid request"}, status=405)
 

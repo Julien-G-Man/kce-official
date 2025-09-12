@@ -140,5 +140,5 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS').lower() == 'true' # Convert to a bool
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL').lower() == 'true'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_EMAIL')
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 CONTACT_FORM_RECEIVER_EMAIL = os.getenv('CONTACT_FORM_RECEIVER_EMAIL')
