@@ -1,3 +1,5 @@
+/* home.css */
+
 /* Enhanced Welcoming Hero Section */
 .hero {
     min-height: 100vh;
@@ -63,7 +65,7 @@
 @media (max-width: 767px) {
     .hero-content {
         padding: var(--spacing-2xl);
-        margin: var(--spacing-lg);
+        margin: 0 var(--spacing-md);
     }
 }
 
@@ -268,7 +270,8 @@
 @media (max-width: 767px) {
     .subscription-content {
         padding: var(--spacing-2xl);
-        margin: var(--spacing-lg);
+        /* Adjusted margins to make the card wider on small screens */
+        margin: 0 var(--spacing-md);
     }
 }
 
@@ -290,7 +293,8 @@
 
 .subscription-form .form-control {
     width: 100%;
-    padding: 0.6rem 0.8rem;
+    /* Standardize padding for better vertical alignment and space */
+    padding: 0.75rem 1rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     font-size: var(--text-base);
@@ -298,7 +302,15 @@
     background: var(--surface);
     font-family: var(--font-body);
     font-weight: 400;
-    min-height: 36px;
+    /* Ensure a consistent minimum height across browsers */
+    min-height: 48px;
+}
+
+/* Responsive adjustment for input padding on smaller screens */
+@media (max-width: 576px) {
+    .subscription-form .form-control {
+        padding: 0.75rem;
+    }
 }
 
 .subscription-form .form-control:focus {
@@ -317,7 +329,8 @@ textarea.subscription-form .form-control {
 .subscription-form .btn {
     width: 100%;
     margin-top: var(--spacing-xl);
-    padding: 0.6rem 0.8rem;
+    /* Standardize padding to match form controls */
+    padding: 0.75rem 1rem;
     font-size: var(--text-base);
     font-weight: 700;
 }

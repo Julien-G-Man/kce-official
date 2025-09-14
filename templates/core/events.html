@@ -50,7 +50,7 @@
                         {% if event.imgae %}
                             <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image" loading="lazy">
                         {% else %} 
-                            <img src="{% static 'img/placeholder.png' %}" alt="Placeholder Image" class="event-image" loading="lazy">
+                            <img src="{% static 'img/white_shofar.jpg' %}" alt="Placeholder Image" class="event-image" loading="lazy">
                         {% endif %}
                         <div class="event-date">
                             {{ event.date|date:"M j, Y" }}
