@@ -1,4 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ADDED: Hero background slider functionality.
+    const heroSlider = document.querySelector('.hero-background-slider');
+    if (heroSlider) {
+        const slides = heroSlider.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        if (slides.length > 1) { // Only run the slider if there's more than one slide
+            // Make the first slide active immediately
+            slides[currentSlide].classList.add('active');
+
+            setInterval(() => {
+                // Remove active class from the current slide
+                slides[currentSlide].classList.remove('active');
+                
+                // Move to the next slide, looping back to the start if necessary
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                // Add active class to the new current slide
+                slides[currentSlide].classList.add('active');
+            }, 5000); // Change image every 5000 milliseconds (5 seconds)
+        } else if (slides.length === 1) {
+            // If there is only one slide, just make it visible
+            slides[0].classList.add('active');
+        }
+    }
+
     const subscriptionForm = document.getElementById('subscriptionForm');
     const formSuccess = document.querySelector('.form-success');
     const formError = document.querySelector('.form-error');
@@ -83,17 +109,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-// Enhanced WebP fallback with friendlier error handling
-(function() {
-    var webpTest = new Image();
-    webpTest.onload = webpTest.onerror = function () {
-        if (webpTest.height !== 2) {
-            var hero = document.querySelector('.responsive-hero-bg');
-            if (hero) {
-                hero.style.backgroundImage = "url('{% static 'img/pstansere.jpg' %}')";
-            }
-        }
-    };
-    webpTest.src = "data:image/webp;base64,UklGRiIAAABXRUJQVlA4TAYAAAAvAAAAAAfQ//73v/+BiOh/AAA=";
-})();

@@ -73,7 +73,7 @@
                 <form id="donationForm" method="POST" action="{% url 'core:give' %}">
                     {% csrf_token %}
                     <h2>Make a Donation</h2>
-                    <p>🔐For security reasons, this feature cannot yet be implimented.</p>
+                    <p>🔐For security reasons, this feature has yet been implimented.</p>
                     
                     {% if messages %}
                         {% for message in messages %}
@@ -86,11 +86,6 @@
                     
                     <div class="form-group">
                         <label for="amount">Choose Amount</label>
-                        <div class="donation-options">
-                            <div class="donation-option active" data-amount="200">GHS 200</div>
-                            <div class="donation-option" data-amount="500">GHS 500</div>
-                            <div class="donation-option" data-amount="1000">GHS 1000</div>
-                        </div>
                         <div class="custom-amount-group">
                             <input type="number" id="customAmount" placeholder="Or enter a custom amount" min="1" name="amount" class="form-control" value="200">
                         </div>

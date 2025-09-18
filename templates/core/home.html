@@ -9,7 +9,15 @@
 
 {% block content %}
     <section class="hero">
-        <div class="hero-background-image" style="background-image: url('{% static 'img/pstansere.jpg' %}')"></div>
+        <div class="hero-background-slider">
+            <div class="slide" style="background-image: url('{% static 'img/pstansere.jpg' %}')"></div>
+            <div class="slide" style="background-image: url('{% static 'img/white_suit.jpg' %}')"></div>
+            <div class="slide" style="background-image: url('{% static 'img/fred-pst.jpg' %}')"></div>
+            <div class="slide" style="background-image: url('{% static 'img/pastor_praying.jpg' %}')"></div>
+            <div class="slide" style="background-image: url('{% static 'img/blue_suit.jpg' %}')"></div>
+            <div class="slide" style="background-image: url('{% static 'img/white_shofar.jpg' %}')"></div>
+        </div>
+
         <div class="container">
             <div class="hero-content fade-in">
                 <div class="welcome-badge">
@@ -17,7 +25,8 @@
                 </div>
                 <div class="hero-text">
                     <h1>WARRIOR BRIDE WORLDWIDE MINISTRY</h1>
-                    <h5>Kingdom Civilization Embassy <br>(KCE)</h5>
+                    <h6>A.K.A</h6>
+                    <h3>Kingdom Civilization Embassy <br>(KCE)</h3>
                     <h6>We are a Commission dedicated to Raising a Supernatural Army of Young People to Take Captive Their Generation for God</h6>
                 </div>
             </div>
@@ -139,45 +148,45 @@
       <div class="container">
          <div class="subscription-content fade-in">
             <h2 class="text-center">Subscribe to our Newsletter</h2>
-               <p class="text-center">Join our community and receive updates about our upcoming events, sermons, and spiritual growth opportunities</p>
-                
-               <div class="form-success" style="display: none;">
+              <p class="text-center">Join our community and receive updates about our upcoming events, sermons, and spiritual growth opportunities</p>
+              
+              <div class="form-success" style="display: none;">
                   <i class="fas fa-check-circle"></i>
                   <p>Welcome to KCE! You'll receive updates about our events and sermons.</p>
-               </div>
+              </div>
 
-               <div class="form-error" style="display: none;">
+              <div class="form-error" style="display: none;">
                   <i class="fas fa-exclamation-circle"></i>
                   <p>There was an error processing your subscription. Please try again.</p>
-               </div>
+              </div>
 
-               <form id="subscriptionForm" class="subscription-form" method="post" action="{% url 'members:subscribe' %}">
+              <form id="subscriptionForm" class="subscription-form" method="post" action="{% url 'members:subscribe' %}">
                   {% csrf_token %}
                   <div class="form-group">
-                     <label for="subscriberName">
-                        <i class="fas fa-user"></i> Full Name
-                     </label>
-                     <input type="text" id="subscriberName" name="name" class="form-control" placeholder="Enter your full name" required>
+                      <label for="subscriberName">
+                          <i class="fas fa-user"></i> Full Name
+                      </label>
+                      <input type="text" id="subscriberName" name="name" class="form-control" placeholder="Enter your full name" required>
                   </div>
 
                   <div class="form-group">
-                     <label for="whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Number
-                     </label>
-                     <input type="tel" id="whatsapp" name="whatsapp" class="form-control" placeholder="e.g., +233 54 630 4940" required>
+                      <label for="whatsapp">
+                          <i class="fab fa-whatsapp"></i> WhatsApp Number
+                      </label>
+                      <input type="tel" id="whatsapp" name="whatsapp" class="form-control" placeholder="e.g., +233 54 630 4940" required>
                   </div>
 
                   <div class="form-group">
-                     <label for="subscriberEmail">
-                        <i class="fas fa-envelope"></i> Email Address
-                     </label>
-                     <input type="email" id="subscriberEmail" name="email" class="form-control" placeholder="Enter your email address" required>
+                      <label for="subscriberEmail">
+                          <i class="fas fa-envelope"></i> Email Address
+                      </label>
+                      <input type="email" id="subscriberEmail" name="email" class="form-control" placeholder="Enter your email address" required>
                   </div>
 
                   <button type="submit" class="btn btn-primary">
-                     <i class="fas fa-paper-plane"></i> Subscribe Now
+                      <i class="fas fa-paper-plane"></i> Subscribe Now
                   </button>
-               </form>
+              </form>
          </div>
       </div>
    </section>
@@ -189,12 +198,12 @@
             <p>Be part of a vibrant family of believers growing in faith, love, and purpose together.</p>
             <div class="cta-buttons">
                   <a href="{% url 'core:contact' %}" class="btn">
-                     <i class="fas fa-comments"></i>
-                     Let's Connect
+                      <i class="fas fa-comments"></i>
+                      Let's Connect
                   </a>
                   <a href="{% url 'core:give' %}" class="btn btn-primary">
-                     <i class="fas fa-heart"></i>
-                     Support Our Ministry
+                      <i class="fas fa-heart"></i>
+                      Support Our Ministry
                   </a>
             </div>
          </div>
@@ -203,5 +212,5 @@
 {% endblock %}
 
 {% block scripts_extra %}
-   <script src="{% static 'js/home.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

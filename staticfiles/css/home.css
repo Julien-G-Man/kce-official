@@ -1,4 +1,10 @@
 /* home.css */
+@font-face {
+  font-family: 'Madson';
+  src: url('../fonts/Madson-Regular.woff2') format('woff2'); /* Adjust the path and filename! */
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* Enhanced Welcoming Hero Section */
 .hero {
@@ -10,8 +16,29 @@
     overflow: hidden;
 }
 
-/* Background image placed in its own div for better control */
-.hero-background-image {
+/* ADDED: An overlay to the main hero section for better text readability on all slides. */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 1; /* Sits above the background slides but below the content. */
+}
+
+/* ADDED: New styles for the background image slider. */
+.hero-background-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Ensures slides are behind everything. */
+}
+
+.hero-background-slider .slide {
     position: absolute;
     top: 0;
     left: 0;
@@ -20,28 +47,26 @@
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;
-    z-index: 0; /* Place it behind the content */
-    opacity: 0.9; /* Add a slight transparency to make text stand out */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out; /* Controls the fade effect duration. */
+}
+
+.hero-background-slider .slide.active {
+    opacity: 1; /* The active slide is visible. */
 }
 
 /* Media Query for Landscape and Desktop Views */
-@media (min-aspect-ratio: 1/1) { /* Applies to wide screens, i.e., laptops, desktops, and landscape tablets */
-    .hero-background-image {
-        background-position: 50% 10%; /* Adjust this value to get the best position for the face */
-        /* The first value is the horizontal position (50% is center) and the second is the vertical position. */
-        /* A smaller percentage like 10% or 15% will move the image up, revealing more of the top. */
+@media (min-aspect-ratio: 1/1) {
+    /* MODIFIED: This now targets the .slide class */
+    .hero-background-slider .slide {
+        background-position: 50% 10%;
     }
 }
 
-/* Add an overlay to the image for better text readability */
-.hero-background-image::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+.hero .container {
+    /* MODIFIED: Ensure the main content container is above the overlay. */
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content {
@@ -52,12 +77,14 @@
     padding: var(--spacing-3xl);
     text-align: center;
     max-width: 900px;
-    position: relative;
-    z-index: 2;
+    /* position: relative; */ /* This is now handled by the parent .container */
+    /* z-index: 2; */       /* This is now handled by the parent .container */
     box-shadow: var(--shadow-xl);
     transition: transform var(--transition-slow);
 }
 
+
+/* The rest of your CSS remains unchanged... */
 .hero-content:hover {
     transform: translateY(-8px);
 }
@@ -69,7 +96,6 @@
     }
 }
 
-.hero-text h1,
 .hero-text h4,
 .hero-text h5,
 .hero-text h6 {
@@ -86,10 +112,12 @@
 }
 
 .hero-text h1 {
+    color:white;
     font-size: var(--text-4xl);
     font-weight: 800;
     margin-bottom: var(--spacing-xl);
     letter-spacing: -0.5px;
+    font-family: 'Madson', sans-serif;
 }
 
 @media (min-width: 768px) {
