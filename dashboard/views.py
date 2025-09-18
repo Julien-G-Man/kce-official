@@ -1,21 +1,55 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from members.models import ContactMessage, NewsletterSubscription
+from members.views import contact_submit, newsletter_subscription
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
-
-
 def admin_dashboard(request):
-   return HttpResponse("Dashboard: admin_dashboard placeholder")
+   """
+   Renders the main admin dashboard page.
+   Retrieves and displays recent contact submissions and newsletter subscriptions.
+   """
+   # Fetch data from the database
+   # The 'order_by'('-sent_at') fetches the latest entries first.
+   contact_submission = ContactMessage.objects.all().order_by('-sent_at')[:10] 
+   subscription = NewsletterSubscription.objects.all().order_by('-subscribed_at')[:10]
+   
+   context = {
+      'contact': contact_submit,
+      'subscription': newsletter_subscription,
+   }
+   return render(request, 'dashboard/admin_dashboard.html', context)
 
 def analytics(request):
    return HttpResponse("Dashboard: analytics placeholder")
 
+@login_required
 def user_management(request):
-   return HttpResponse("Dashboard: user_management placeholder")
+   """
+   Manages users from a simple, non-technical interface.
+   """
+   # Exclude staff and superusers from the list for simplicity
+   users = User.objects.filter(is_staff=False, is_superuser=False).order_by('-date_joined')
+    
+   context = {
+      'users': users,
+      'title': 'User Management',
+   }
+   return render(request, 'dashboard/user_management.html', context)
 
 def settings(request):
    return HttpResponse("Dashboard: settings placeholder")
+
+def admin_invite(request):
+   render(request, 'admin_invite.htm')
  
+def export_contacts(request):
+   return render(request, 'export_contacts') 
+ 
+def export_subscriptions(request):
+   return render(request, 'export_subscriptions') 
  
 """
 

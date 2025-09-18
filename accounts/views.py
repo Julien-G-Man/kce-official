@@ -5,7 +5,7 @@ from django.http import HttpResponse
 def admin_login(request):
    return HttpResponse("Accounts: admin_login placeholder")
 
-def logout(request):
+def admin_logout(request):
    return HttpResponse("Accounts: logout placeholder")
 
 def admin_register(request):
