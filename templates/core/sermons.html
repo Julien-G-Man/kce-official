@@ -20,12 +20,6 @@
             <h3>Filter Sermons</h3>
             <div class="filter-group">
                 <input type="text" id="searchInput" class="filter-input" placeholder="Search sermons...">
-                <select id="speakerFilter" class="filter-input">
-                    <option value="">All Preachers</option>
-                    {% for speaker in speakers %}
-                        <option value="{{ speaker }}">{{ speaker|title }}</option>
-                    {% endfor %}
-                </select>
                 <select id="categoryFilter" class="filter-input">
                     <option value="">All Categories</option>
                     {% for series_item in series_list %}

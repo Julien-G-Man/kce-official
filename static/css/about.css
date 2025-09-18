@@ -14,14 +14,27 @@
     font-family: 'Georgia', serif;
 }
 
-/* Featured image styles */
-.section-image {
-    display: block;
-    max-width: 600px;
-    margin: 0 auto var(--spacing-md) auto;
-    height: auto;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+/* Styles for the About page image slider */
+#about-image-slider {
+    position: relative; /* Required to position the slides inside */
+    overflow: hidden;   /* Hides parts of images outside the rounded corners */
+    aspect-ratio: 16 / 10; /* Gives the container a consistent shape */
+}
+
+#about-image-slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fill the container without stretching */
+    object-position:  top; /* Ensures image top is visible */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out; /* Controls the fade speed */
+}
+
+#about-image-slider .slide.visible {
+    opacity: 1; /* Makes the current slide visible */
 }
 
 /* Mission section container styles */
@@ -156,6 +169,15 @@
     width: 100%;
     height: 300px;
     object-fit: cover;
+    object-position: top;
+}
+
+/* Apply these styles for screens 768px wide and above */
+@media (min-width: 768px) {
+  .leader-image {
+    height: 850px; 
+    /* Or try a different value like 500px until it looks right. */
+  }
 }
 
 /* Leader information container styles */

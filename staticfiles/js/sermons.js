@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- DOM refs ---
     const searchInput = document.getElementById('searchInput');
-    const speakerFilter = document.getElementById('speakerFilter');
+    const speakerFilter = document.getElementById('speakerFilter'); // was removed from html, it'll remain here in case of future uses
     const categoryFilter = document.getElementById('categoryFilter');
     const dateFilter = document.getElementById('dateFilter');
     const tagsContainer = document.getElementById('tagsContainer');
