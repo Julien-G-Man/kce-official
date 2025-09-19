@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Books | Kingdom Civilization Embassy{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <!-- This new section now acts as the main header and extends full-width -->
+        <section class="book-hero-description fade-in">
+            <div class="container">
+               <h1><br></h1>
+                <span class="book-hero-pretitle">CURRENTLY AVAILABLE</span>
+                <h1>The Library of Light Bookshop</h1>
+                <p>The Books are now officially out and available for purchase. Nationwide delivery is assured!</p>
+                <p>Get them at our Bookshop in church - "The Library of Light Bookshop"!</p>
+                <p>For those outside Ghana, you can get them on Amazon and Selar!</p>
+                <p>For more information, kindly call/whatsapp: +233 54 968 1747</p>
+                <p>-</p>
+                <p>Scribal Angel Publications,</p>
+                <p>Publishing Words of Truth, Goodness and Love that Shape Generations!!!</p>
+            </div>
+        </section>
+        
+        <section class="books-section container" id="books-listing">
+            <div class="books-grid">
+                <div class="book-card fade-in">
+                    <img src="{% static 'img/books/book1.jpg' %}" alt="Book Cover" class="book-image" loading="lazy">
+                    <div class="book-info">
+                        <h3>In The Beginning It Was Not So</h3>
+                        <p>A powerful guide to finding your purpose and fulfilling God's calling for your life.</p>
+                        <a href="https://linktr.ee/kingdomcivilizationembassy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </a>
+                    </div>
+                </div>
+                <div class="book-card fade-in">
+                    <img src="{% static 'img/books/book2.jpg' %}" alt="Book Cover" class="book-image" loading="lazy">
+                    <div class="book-info">
+                        <h3>35 Days Into Understanding Grace, Works and Eternal Judgement</h3>
+                        <p>Learn how to intercede for the nations and bring divine change to the world.</p>
+                        <a href="https://linktr.ee/kingdomcivilizationembassy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/books.js' %}"></script>
+{% endblock %}

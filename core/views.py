@@ -76,3 +76,6 @@ def core_page_detail(request, slug):
 
 def gallery(request):
    return render(request, 'core/gallery.html')
+
+def books(request):
+   return render(request, 'core/books.html')
