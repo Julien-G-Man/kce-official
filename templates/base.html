@@ -30,7 +30,7 @@
                 <a href="{% url 'core:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
                 <a href="{% url 'core:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About Us</a>
                 <a href="{% url 'core:sermons' %}" class="{% if request.resolver_match.url_name == 'sermons' %}active{% endif %}">Sermons</a>
-                <a href="{% url 'core:events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a>
+                <a href="{% url 'core:books' %}" class="{% if request.resolver_match.url_name == 'books' %}active{% endif %}">Books</a>
                 <a href="{% url 'core:quotes' %}" class="{% if request.resolver_match.url_name == 'quotes' %}active{% endif %}">Quotes</a>
                 <a href="{% url 'core:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
             </div>

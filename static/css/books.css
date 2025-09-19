@@ -1,9 +1,9 @@
 /* General body styles for the fixed background */
 body {
     background-color: #2b6cba;
-    background-image: url('/static/img/books/book2.jpg'); /* The lion image */
+    background-image: url('/static/img/books/grace_works_and_eternal_judgement.jpg'); /* The lion image */
     background-size: cover;
-    background-position: right center;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* This is the key change */
     
@@ -35,6 +35,8 @@ body {
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition-normal);
     text-align: center;
+    display: flex; 
+    flex-direction: column;
 }
 
 .book-card:hover {
@@ -51,6 +53,10 @@ body {
 
 .book-info {
     padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    flex-grow: 1;
 }
 
 .book-info h3 {
@@ -64,11 +70,13 @@ body {
     font-size: var(--text-sm);
     color: var(--text-secondary);
     margin-bottom: var(--spacing-md);
+    margin-bottom: auto;
 }
 
 .book-info .btn {
     width: 100%;
     font-weight: 600;
+    display: block; 
 }
 
 .book-info .btn-primary {
