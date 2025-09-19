@@ -11,5 +11,6 @@ urlpatterns = [
    path('sermons/', views.sermons, name='sermons'),
    path('give/', views.give, name='give'),
    path('quotes/', views.quotes, name='quotes'),
+   path('gallery/', views.gallery, name='gallery'),
    path('<slug:slug>/', views.core_page_detail, name='core_page_detail'), # Must be last
 ]

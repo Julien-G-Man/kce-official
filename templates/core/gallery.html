@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gallery | Kingdom Civilization Embassy{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="about-header fade-in">
+        <div class="container">
+            <h1 class="text-center">Our Gallery</h1>
+            <p class="text-center">A collection of moments from our events</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="gallery-section">
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/congregation.jpg' %}" alt="Congregation" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/final_service.jpg' %}" alt="Final Service" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/independence_freedom_decolonization.jpg' %}" alt="Event Image 3" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/youthpackage.jpg' %}" alt="Youth Package" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/white_shofar.jpg' %}" alt="White Shofar" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/pastor_praying.jpg' %}" alt="Pastor Praying" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/pastor_and_queen_ansere.jpg' %}" alt="Pastor and Queen" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/fred-pst.jpg' %}" alt="Pastor and Deacon Fred" class="gallery-image" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="{% static 'img/white_suit.jpg' %}" alt="Pastor in White Suit" class="gallery-image" loading="lazy">
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}

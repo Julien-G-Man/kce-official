@@ -73,3 +73,6 @@ def core_page_detail(request, slug):
    page = get_object_or_404(CorePage, slug=slug)
    context = {'page': page}
    return render(request, 'core/core_page_detail.html', context)
+
+def gallery(request):
+   return render(request, 'core/gallery.html')
