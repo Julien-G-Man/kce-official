@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/donation.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="give-header text-center">
+        <div class="container">
+            <h1>Sow a Seed, Cultivate a Harvest</h1>
+            <p>Your partnership offering is a vital seed that helps us spread the Gospel and impact lives. We appreciate your generosity and faith!</p>
+        </div>
+    </header>
+
+    <main class="container give-main">
+        <div class="give-grid">
+            <div class="give-info">
+                <section class="info-section">
+                    <h2>Why Your Giving Matters</h2>
+                    <p>Every donation, no matter the size, fuels our ministry and its mission. Your contribution helps us with community outreach, global evangelism, and essential ministry operations.</p>
+                    <div class="mission-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h3>Community Impact</h3>
+                            <p>Providing for local families, individuals, and those in need.</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-globe-americas"></i>
+                            <h3>Global Outreach</h3>
+                            <p>Extending our anointing and message to communities worldwide.</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-church"></i>
+                            <h3>Ministry Growth</h3>
+                            <p>Expanding our programs and services to reach more souls.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="info-section other-ways-to-give">
+                    <h2>Other Ways to Give</h2>
+                    <p>Can't use the online form? You can give directly through the methods below.</p>
+                    <div class="bank-details">
+                        <div class="bank-item">
+                            <h3>MTN Mobile Money</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Phone:</strong> (+233) 054-7431863</p>
+                        </div>
+                        <div class="bank-item">
+                            <h3>Ecobank</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Account Number:</strong> 1441004818512</p>
+                            <p><strong>SWIFT Code:</strong> ECOCGHAC</p>
+                        </div>
+                        <div class="bank-item">
+                            <h3>UBA Dollar Account</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Account Number:</strong> 02048584802231</p>
+                            <p><strong>SWIFT Code:</strong> STBGGHAC</p>
+                        </div>
+                        <div class="bank-item">
+                            <h3>UBA Cedi Account</h3>
+                            <p><strong>Account Name:</strong> Francis Kwaku Ansere</p>
+                            <p><strong>Account Number:</strong> 02048584801552</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block script_extra %}
+    <script src="{% static 'js/give.js' %}"></script>
+{% endblock %}

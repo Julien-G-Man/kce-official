@@ -65,6 +65,11 @@ def sermons(request):
 def give(request):
    return render(request, 'core/give.html')
 
+# currently using donation while on the give page 
+# we will be buildind and testing integrated payments
+def donation(request):
+   return render(request, 'core/donation.html')
+
 def quotes(request):
    all_quotes = Quote.objects.order_by('author', 'id')
    return render(request, 'core/quotes.html', {'quotes': all_quotes})
