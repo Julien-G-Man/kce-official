@@ -24,7 +24,7 @@ urlpatterns = [
     # include App urls
     path('', include('core.urls')), # public site
     path('members/', include('members.urls')),
-    path('dashboard/', include('dashboard.urls')), 
+    path('administrator/', include('dashboard.urls')), 
     path('accounts/', include('accounts.urls')),
 ]
 
