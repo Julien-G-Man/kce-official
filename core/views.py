@@ -3,7 +3,6 @@ from django.utils import timezone
 from . import models
 from .models import CorePage, Event, Sermon, Quote
 
-# Create your views here.
 def home(request):
    # Fetch data to display on the homepage
    latest_sermon = Sermon.objects.order_by('-date').first()
@@ -49,13 +48,15 @@ def contact(request):
    return render(request, 'core/contact.html')
 
 def sermons(request):
-    all_sermons = Sermon.objects.order_by('-date')
-    
+    live_sermon = Sermon.objects.filter(is_live=True).first()
+    all_sermons = Sermon.objects.filter(is_live=False).order_by('-date')
+
     # Get unique preachers and series for the filter dropdowns
     speakers = Sermon.objects.order_by('preacher').values_list('preacher', flat=True).distinct()
     series = Sermon.objects.order_by('series').values_list('series', flat=True).distinct().exclude(series__isnull=True).exclude(series__exact='')
 
     context = {
+       'live_sermon': live_sermon,
         'sermons': all_sermons,
         'speakers': speakers,
         'series_list': series,

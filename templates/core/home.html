@@ -34,6 +34,8 @@
         </div>
     </section>
 
+<!-- Hide events for now -->
+
     <section class="section">
         <div class="container">
             <div class="section-header fade-in">
@@ -48,7 +50,7 @@
                         <span class="month">{{ upcoming_event.date|date:"M"|upper }}</span>
                     </div>
                     <h3>{{ upcoming_event.title }}</h3>
-                    <p>{{ upcoming_event.description|truncatewords:15 }}</p>
+                    <p>{{ upcoming_event.description|truncatewords:25 }}</p>
                     <div class="event-location">
                         <i class="fas fa-clock"></i>
                         <span>{{ upcoming_event.date|time:"g:i A" }}</span>
@@ -118,7 +120,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Words of Wisdom</h2>
-                <p>Be inspired by powerful teachings from our spiritual leader</p>
+                <p>Be inspired by powerful quotes and teachings from our spiritual leader</p>
             </div>
             {% if random_quote %}
                 <div class="quote-card fade-in">

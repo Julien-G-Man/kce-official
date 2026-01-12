@@ -8,95 +8,167 @@
 {% endblock %}
 
 {% block content %}
-    <header class="sermons-header">
-        <div class="container">
-            <h1 class="text-center">Sermons</h1>
-            <p class="text-center">Listen to powerfull messages from the man of God Pastor Ansere</p>
+
+<!-- =======================
+     PAGE HEADER
+======================== -->
+<header class="sermons-header">
+    <div class="container">
+        <h1 class="text-center">Sermons</h1>
+        <p class="text-center">
+            Listen to powerful messages from the man of God, Pastor Ansere
+        </p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- =======================
+         LIVE SERMON SECTION
+    ======================== -->
+    {% if live_sermon %}
+    <section class="live-sermon-section">
+        <h2 class="live-title">🔴 Live Now</h2>
+
+        <div class="live-video-wrapper">
+            <iframe
+                width="100%"
+                height="500"
+                src="{{ live_sermon.get_embed_url }}?autoplay=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
         </div>
-    </header>
+    </section>
+    {% endif %}
 
-    <main class="container">
-        <div class="sermons-filters">
-            <h3>Filter Sermons</h3>
-            <div class="filter-group">
-                <input type="text" id="searchInput" class="filter-input" placeholder="Search sermons...">
-                <select id="categoryFilter" class="filter-input">
-                    <option value="">All Categories</option>
-                    {% for series_item in series_list %}
-                        <option value="{{ series_item }}">{{ series_item }}</option>
-                    {% endfor %}
-                </select>
-                <select id="dateFilter" class="filter-input">
-                    <option value="">Sort by Date</option>
-                    <option value="latest">Latest First</option>
-                    <option value="oldest">Oldest First</option>
-                </select>
-            </div>
+    <!-- =======================
+         FILTERS
+    ======================== -->
+    <div class="sermons-filters">
+        <h3>Filter Sermons</h3>
 
-            <div class="tags-filter">
-                <h4>Filter by Tags</h4>
-                <div id="tagsContainer" class="tags-container"></div>
-            </div>
-        </div>
+        <div class="filter-group">
+            <input
+                type="text"
+                id="searchInput"
+                class="filter-input"
+                placeholder="Search sermons...">
 
-        <section class="sermons-grid">
-            {% if sermons %}
-                {% for s in sermons %}
-                    <div class="sermon-card"
-                         {% if s.highlight_embed %}
-                             data-embed-url="{{ s.highlight_embed}}" 
-                         {% endif %}
-                         
-                         data-video-url="{{ s.video_url }}"
-                         data-title="{{ s.title }}"
-                         data-preacher="{{ s.preacher }}"
-                         data-date="{{ s.date|date:'F j, Y' }}"
-                         data-series="{{ s.series }}"
-                         data-tags="{% for tag in s.tags.all %}{{ tag.name|lower }}{% if not forloop.last %},{% endif %}{% endfor %}">
-
-                        <div class="sermon-thumbnail-container play-btn">
-                            {% if s.get_highlight_id %}
-                                <img src="https://img.youtube.com/vi/{{ s.get_highlight_id }}/hqdefault.jpg" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
-                            {% elif s.thumbnail %}
-                                <img src="{{ s.thumbnail.url }}" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
-                            {% else %}     
-                                <img src="{% static 'img/white_suit.jpg' %}" alt="{{ s.title }}" class="sermon-thumbnail" loading="lazy">
-                            {% endif %}
-                            <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
-                        </div>
-
-                        <div class="sermon-info">
-                            <h4 class="sermon-title">{{ s.title }}</h4>
-                            <p class="sermon-preacher">{{ s.preacher }}</p>
-                            <p class="sermon-date">{{ s.date|date:"F j, Y" }}</p>
-                            {% if s.video_url %}
-                                <a href="{{ s.video_url }}" class="btn btn-primary watch-full-btn" target="_blank" rel="noopener">
-                                    <i class="fas fa-external-link-alt"></i> Watch Full Sermon
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
+            <select id="categoryFilter" class="filter-input">
+                <option value="">All Categories</option>
+                {% for series_item in series_list %}
+                    <option value="{{ series_item }}">{{ series_item }}</option>
                 {% endfor %}
-            {% else %}
-                <div class="no-sermons">
-                    <i class="fas fa-search"></i>
-                    <p>No sermons available.</p>
-                </div>
-            {% endif %}
-        </section>
-    </main>
+            </select>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="video-container">
-                <iframe id="videoFrame" width="100%" height="100%" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </div>
+            <select id="dateFilter" class="filter-input">
+                <option value="">Sort by Date</option>
+                <option value="latest">Latest First</option>
+                <option value="oldest">Oldest First</option>
+            </select>
+        </div>
+
+        <div class="tags-filter">
+            <h4>Filter by Tags</h4>
+            <div id="tagsContainer" class="tags-container"></div>
         </div>
     </div>
+
+    <!-- =======================
+         SERMONS GRID
+    ======================== -->
+    <section class="sermons-grid">
+        {% if sermons %}
+            {% for s in sermons %}
+                <div class="sermon-card"
+                     {% if s.highlight_embed %}
+                        data-embed-url="{{ s.highlight_embed }}"
+                     {% endif %}
+                     data-video-url="{{ s.video_url }}"
+                     data-title="{{ s.title }}"
+                     data-preacher="{{ s.preacher }}"
+                     data-date="{{ s.date|date:'F j, Y' }}"
+                     data-series="{{ s.series }}"
+                     data-tags="{% for tag in s.tags.all %}{{ tag.name|lower }}{% if not forloop.last %},{% endif %}{% endfor %}">
+
+                    <!-- Thumbnail -->
+                    <div class="sermon-thumbnail-container play-btn">
+                        {% if s.get_highlight_id %}
+                            <img
+                                src="https://img.youtube.com/vi/{{ s.get_highlight_id }}/hqdefault.jpg"
+                                alt="{{ s.title }}"
+                                class="sermon-thumbnail"
+                                loading="lazy">
+                        {% elif s.thumbnail %}
+                            <img
+                                src="{{ s.thumbnail.url }}"
+                                alt="{{ s.title }}"
+                                class="sermon-thumbnail"
+                                loading="lazy">
+                        {% else %}
+                            <img
+                                src="{% static 'img/white_suit.jpg' %}"
+                                alt="{{ s.title }}"
+                                class="sermon-thumbnail"
+                                loading="lazy">
+                        {% endif %}
+
+                        <div class="play-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="sermon-info">
+                        <h4 class="sermon-title">{{ s.title }}</h4>
+                        <p class="sermon-preacher">{{ s.preacher }}</p>
+                        <p class="sermon-date">{{ s.date|date:"F j, Y" }}</p>
+
+                        {% if s.video_url %}
+                            <a
+                                href="{{ s.video_url }}"
+                                class="btn btn-primary watch-full-btn"
+                                target="_blank"
+                                rel="noopener">
+                                <i class="fas fa-external-link-alt"></i>
+                                Watch Full Sermon
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-sermons">
+                <i class="fas fa-search"></i>
+                <p>No sermons available.</p>
+            </div>
+        {% endif %}
+    </section>
+
+</main>
+
+<!-- =======================
+     VIDEO MODAL
+======================== -->
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+
+        <div class="video-container">
+            <iframe
+                id="videoFrame"
+                width="100%"
+                height="100%"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block script_extra %}

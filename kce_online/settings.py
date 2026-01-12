@@ -4,10 +4,8 @@ from pathlib import Path
 import os
 import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load variables from .env
 load_dotenv(BASE_DIR / ".env")
 
 def get_env_variable(var_name: str) -> str:
@@ -18,11 +16,10 @@ def get_env_variable(var_name: str) -> str:
 
 SECRET_KEY = get_env_variable("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 
-ALLOWED_HOSTS = ["kceonline.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["kceonline.onrender.com", "localhost", "127.0.0.1", "https://www.google.com/search?q=kceonline.onrender.com"]
 
 # Application definition
 
@@ -65,15 +62,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.live_sermon'
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'kce_online.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 if DEBUG:
     # Use SQLite for local development
@@ -93,9 +88,6 @@ else:
         )
     }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -111,10 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -122,9 +110,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS  = [os.path.join(BASE_DIR, 'static')] 
@@ -138,15 +123,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Custom User
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logins
-LOGIN_URL = "/accounts/login/" # change to a named URL like 'accounts:login' once implemented
+LOGIN_URL = "/accounts/login/" 
 LOGIN_REDIRECT_URL = "core:home"
-LOGOUT_REDIRECT_URL = "core:home"# settings.py
+LOGOUT_REDIRECT_URL = "core:home"
 
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')

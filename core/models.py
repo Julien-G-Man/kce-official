@@ -31,10 +31,13 @@ class Sermon(models.Model):
    preacher = models.CharField(max_length=100)
    series = models.CharField(max_length=200, blank=True, null=True)
    date = models.DateField()
+   
    highlight_url = models.URLField(blank=True, null=True)  # Short clip in website
    video_url = models.URLField(blank=True, null=True)     # full video in YouTube
    thumbnail = models.ImageField(upload_to='sermon_thumbnails/', blank=True, null=True)
 
+   is_live = models.BooleanField(default=False)
+   
    def __str__(self):
       return f"{self.title} ({self.date})"
 

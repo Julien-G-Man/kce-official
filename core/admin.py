@@ -19,6 +19,11 @@ class SermonAdmin(admin.ModelAdmin):
    list_display = ('title', 'preacher', 'series', 'date')
    list_filter = ('date', 'preacher', 'series')
    search_fields = ('title', 'preacher', 'subtitle', 'series')
+   
+   def save_model(self, request, obj, form, change):
+      if obj.is_live:
+         Sermon.objects.filter(is_live=True).exclude(pk=obj.pk).update(is_live=True)
+      super().save_model(request, obj, form, change)   
 
 @admin.register(Quote)
 class QuoteAdmin(admin.ModelAdmin):

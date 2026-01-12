@@ -40,6 +40,62 @@ body {
 
 /* --- */
 
+/* =======================
+   Live Sermon Section
+======================= */
+
+.live-sermon-section {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.live-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #c62828; /* deep red for live */
+}
+
+/* Wrapper keeps video responsive and consistent with grid */
+.live-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.live-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Reduce gap when live sermon is present */
+.live-sermon-section + .sermons-filters {
+    margin-top: 0;
+}
+
+@media (max-width: 600px) {
+    .live-title {
+        font-size: 1.2rem;
+    }
+
+    .live-video-wrapper {
+        padding-top: 60%; /* slightly taller for mobile */
+    }
+}
+
+
 /* Sermons Filters */
 .sermons-filters {
     margin-bottom: var(--spacing-xl);
