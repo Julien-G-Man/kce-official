@@ -6,12 +6,12 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(BASE_DIR / ".env")
+load_dotenv()
 
 def get_env_variable(var_name: str) -> str:
-    value = os.getenv(var_name)
+    value = os.environ.get(var_name)
     if not value:
-        raise ImproperlyConfigured(f"Set the {var_name} environment variable in .env")
+        raise ImproperlyConfigured(f"Set the {var_name} environment variable")
     return value
 
 SECRET_KEY = get_env_variable("SECRET_KEY")
@@ -19,8 +19,7 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 
-ALLOWED_HOSTS = ["kceonline.onrender.com", "localhost", "127.0.0.1", "https://www.google.com/search?q=kceonline.onrender.com"]
-
+ALLOWED_HOSTS = ["kceonline.onrender.com", "localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,8 +38,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,22 +69,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kce_online.wsgi.application'
 
-if DEBUG:
-    # Use SQLite for local development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3', # use locally
-        }
-    }
-else:
-    # Production on Render with Postgres
+# Check if we are in production or have a DATABASE_URL provided
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if not DEBUG and DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"),
+            default=DATABASE_URL,
             conn_max_age=600,
             ssl_require=True,
         )
+    }
+else:
+    # Local Development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -133,7 +134,7 @@ LOGOUT_REDIRECT_URL = "core:home"
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT')) # Convert to an integer
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'false').lower() == 'true' # Convert to a boolean
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'false').lower() == 'true'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
