@@ -5,7 +5,6 @@ from members.views import contact_submit, newsletter_subscription
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-# Create your views here.
 def admin_dashboard(request):
    """
    Renders the main admin dashboard page.

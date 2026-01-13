@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import CorePage, Event, Sermon, Quote
 
-# Register your models here.
-
 @admin.register(CorePage)
 class CorePageAdmin(admin.ModelAdmin):
    list_display = ('title', 'last_updated')

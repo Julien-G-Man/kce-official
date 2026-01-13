@@ -1,180 +1,131 @@
-// This console.log should appear as soon as the file loads.
-console.log('sermons.js is running!');
+console.log('sermons.js loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
-    const dbg = (...args) => console.debug('[sermons.js]', ...args);
 
-    // --- DOM refs ---
     const searchInput = document.getElementById('searchInput');
-    const speakerFilter = document.getElementById('speakerFilter'); // was removed from html, it'll remain here in case of future uses
     const categoryFilter = document.getElementById('categoryFilter');
     const dateFilter = document.getElementById('dateFilter');
     const tagsContainer = document.getElementById('tagsContainer');
     const sermonsGrid = document.querySelector('.sermons-grid');
 
-    // Modal elements
     const modal = document.getElementById('videoModal');
     const videoFrame = document.getElementById('videoFrame');
     const closeModal = document.querySelector('.close-modal');
 
-    // --- Helper Functions ---
-    // These are now included directly in this file
-    function getYouTubeId(url) {
-        if (!url) return null;
-        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-        const match = url.match(regExp);
-        return (match && match[2].length === 11) ? match[2] : null;
+    if (!sermonsGrid) return;
+
+    const sermonCards = Array.from(document.querySelectorAll('.sermon-card'));
+
+    function parseTags(tags) {
+        if (!tags) return [];
+        return tags.split(',').map(t => t.trim().toLowerCase());
     }
 
-    function parseTags(tagsString) {
-        if (!tagsString) return [];
-        return tagsString.split(',').map(t => t.trim()).filter(Boolean);
-    }
-    
-    // Get a live collection of all sermon cards
-    const allSermonCards = Array.from(document.querySelectorAll('.sermon-card'));
-    dbg('Found sermon cards:', allSermonCards.length);
-
-    // --- Tags UI & Logic ---
     function populateTags() {
         if (!tagsContainer) return;
-        const allTags = new Set();
-        allSermonCards.forEach(card => {
-            const tagsString = card.dataset.tags || '';
-            parseTags(tagsString).forEach(tag => allTags.add(tag.toLowerCase()));
+
+        const tagSet = new Set();
+
+        sermonCards.forEach(card => {
+            parseTags(card.dataset.tags).forEach(tag => tagSet.add(tag));
         });
 
         tagsContainer.innerHTML = '';
-        allTags.forEach(tag => {
-            const span = document.createElement('span');
-            span.className = 'tag-btn';
-            span.textContent = tag;
-            span.dataset.tag = tag;
-            span.addEventListener('click', () => {
-                span.classList.toggle('active');
+
+        tagSet.forEach(tag => {
+            const el = document.createElement('span');
+            el.className = 'tag-btn';
+            el.textContent = tag;
+            el.dataset.tag = tag;
+            el.onclick = () => {
+                el.classList.toggle('active');
                 filterSermons();
-            });
-            tagsContainer.appendChild(span);
+            };
+            tagsContainer.appendChild(el);
         });
     }
 
     function getSelectedTags() {
-        if (!tagsContainer) return new Set();
-        return new Set(Array.from(tagsContainer.querySelectorAll('.tag-btn.active')).map(t => t.dataset.tag));
+        return new Set(
+            Array.from(tagsContainer.querySelectorAll('.tag-btn.active'))
+                .map(el => el.dataset.tag)
+        );
     }
-    
-    // --- Main Filter & Sort Logic ---
+
     function filterSermons() {
-        const searchTerm = (searchInput?.value || '').toLowerCase();
-        const selectedSpeaker = (speakerFilter?.value || '').toLowerCase();
-        const selectedCategory = (categoryFilter?.value || '').toLowerCase();
-        const selectedDate = dateFilter?.value || '';
+        const search = (searchInput?.value || '').toLowerCase();
+        const category = (categoryFilter?.value || '').toLowerCase();
+        const sortOrder = dateFilter?.value;
         const selectedTags = getSelectedTags();
 
-        const itemsToShow = [];
-        const itemsToHide = [];
+        let visible = [];
 
-        allSermonCards.forEach(card => {
-            const cardTitle = (card.dataset.title || '').toLowerCase();
-            const cardPreacher = (card.dataset.preacher || '').toLowerCase();
-            const cardTags = parseTags(card.dataset.tags || '').map(t => t.toLowerCase());
-            const cardDate = new Date(card.dataset.date || 0);
+        sermonCards.forEach(card => {
+            const title = card.dataset.title.toLowerCase();
+            const preacher = card.dataset.preacher.toLowerCase();
+            const series = (card.dataset.series || '').toLowerCase();
+            const tags = parseTags(card.dataset.tags);
+            const date = new Date(card.dataset.date);
 
-            const matchesSearch = !searchTerm || cardTitle.includes(searchTerm) || cardPreacher.includes(searchTerm);
-            const matchesSpeaker = !selectedSpeaker || cardPreacher === selectedSpeaker;
-            const matchesCategory = !selectedCategory || (card.dataset.series || '').toLowerCase() === selectedCategory;
-            const matchesTags = selectedTags.size === 0 || cardTags.some(t => selectedTags.has(t));
-            
-            if (matchesSearch && matchesSpeaker && matchesCategory && matchesTags) {
-                itemsToShow.push({ card, date: cardDate });
-            } else {
-                itemsToHide.push(card);
+            const matchSearch = !search || title.includes(search) || preacher.includes(search);
+            const matchCategory = !category || series === category;
+            const matchTags = selectedTags.size === 0 || tags.some(t => selectedTags.has(t));
+
+            if (matchSearch && matchCategory && matchTags) {
+                visible.push({ card, date });
             }
         });
 
-        // Sort the visible cards
-        if (selectedDate === 'latest') {
-            itemsToShow.sort((a, b) => b.date - a.date);
-        } else if (selectedDate === 'oldest') {
-            itemsToShow.sort((a, b) => a.date - b.date);
+        if (sortOrder === 'latest') {
+            visible.sort((a, b) => b.date - a.date);
+        } else if (sortOrder === 'oldest') {
+            visible.sort((a, b) => a.date - b.date);
         }
-        
-        // Reorder the grid and handle "no sermons" message
-        const fragment = document.createDocumentFragment();
-        itemsToShow.forEach(item => fragment.appendChild(item.card));
+
         sermonsGrid.innerHTML = '';
-        sermonsGrid.appendChild(fragment);
 
-        if (itemsToShow.length === 0) {
-            sermonsGrid.innerHTML = `<div class="no-sermons"><i class="fas fa-search"></i><p>No sermons found.</p></div>`;
+        if (visible.length === 0) {
+            sermonsGrid.innerHTML = `
+                <div class="no-sermons">
+                    <i class="fas fa-search"></i>
+                    <p>No sermons found.</p>
+                </div>`;
+            return;
         }
-    }
-    
-    // --- Event Listeners ---
-    // Add event listeners for the filter elements
-    if (searchInput) searchInput.addEventListener('input', filterSermons);
-    if (speakerFilter) speakerFilter.addEventListener('change', filterSermons);
-    if (categoryFilter) categoryFilter.addEventListener('change', filterSermons);
-    if (dateFilter) dateFilter.addEventListener('change', filterSermons);
 
-    // Handle modal for each card
-    allSermonCards.forEach(card => {
+        visible.forEach(item => sermonsGrid.appendChild(item.card));
+    }
+
+    sermonCards.forEach(card => {
         const playBtn = card.querySelector('.play-btn');
-        if (playBtn) {
-            playBtn.addEventListener('click', () => {
-                const embedUrl = card.dataset.embedUrl;
-                
-                // --- DEBUGGING LINES ---
-                console.log('Embed URL:', embedUrl);
-                console.log('Video Frame Element:', videoFrame);
-                // --- END DEBUGGING LINES ---
+        const embedUrl = card.dataset.embedUrl;
 
-                if (embedUrl) {
-                    if (videoFrame) {
-                        videoFrame.src = `${embedUrl}?autoplay=1`;
-                        modal.style.display = 'block';
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        dbg('Error: videoFrame element not found in the DOM.');
-                    }
-                } else {
-                    dbg('No valid video URL found for this card. Check if highlight_url is set correctly.');
-                }
-            });
-        }
-    });
+        if (!playBtn || !embedUrl) return;
 
-    if (closeModal) {
-        closeModal.onclick = () => {
-            modal.style.display = 'none';
-            if (videoFrame) {
-                videoFrame.src = '';
-            }
-            document.body.style.overflow = 'auto';
+        playBtn.onclick = () => {
+            videoFrame.src = `${embedUrl}?autoplay=1`;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         };
-    }
-    
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            if (videoFrame) {
-                videoFrame.src = '';
-            }
-            document.body.style.overflow = 'auto';
-        }
     });
 
-    // --- Initialization ---
+    closeModal.onclick = () => {
+        modal.style.display = 'none';
+        videoFrame.src = '';
+        document.body.style.overflow = '';
+    };
+
+    window.onclick = e => {
+        if (e.target === modal) {
+            closeModal.onclick();
+        }
+    };
+
     populateTags();
     filterSermons();
-    dbg('sermons.js init complete.');
 });
 
 document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-    img.addEventListener('load', () => {
-        img.classList.add('loaded');
-    });
-    if (img.complete) {
-        img.classList.add('loaded');
-    }
+    if (img.complete) img.classList.add('loaded');
+    img.onload = () => img.classList.add('loaded');
 });
