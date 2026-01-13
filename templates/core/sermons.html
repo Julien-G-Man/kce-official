@@ -32,13 +32,24 @@
 
         <div class="live-video-wrapper">
             <iframe
+                src="{{ live_sermon.get_embed_url }}?autoplay=1&mute=1"
                 width="100%"
                 height="500"
-                src="{{ live_sermon.get_embed_url }}?autoplay=1"
                 frameborder="0"
-                allow="autoplay; encrypted-media"
+                allow="autoplay; encrypted-media, picture-in-picture"
                 allowfullscreen>
             </iframe>
+        </div>
+
+        <div>
+            <h2 class="live-sermon-title">{{ live_sermon.title }}</h2>
+            <a
+                href="{{ live_sermon.video_url }}"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-danger live-youtube-btn">
+                Watch on YouTube
+            </a>
         </div>
     </section>
     {% endif %}

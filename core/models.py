@@ -2,8 +2,6 @@ from django.db import models
 from django.utils.text import slugify
 from urllib.parse import urlparse, parse_qs
 
-# Create your models here.
-
 class CorePage(models.Model):
    title = models.CharField(max_length=200, unique=True)
    slug = models.SlugField(max_length=200, unique=True)
@@ -41,6 +39,12 @@ class Sermon(models.Model):
    def __str__(self):
       return f"{self.title} ({self.date})"
 
+   def save(self, *args, **kwargs):
+      if self.is_live:
+         # Unset any other live sermon
+         Sermon.objects.filter(is_live=True).exclude(pk=self.pk).update(is_live=False)
+      super().save(*args, **kwargs)
+        
    @property
    def highlight_embed(self):
       """
@@ -75,15 +79,34 @@ class Sermon(models.Model):
       return None
 
    def get_youtube_id(self):
-      """Extracts the YouTube video ID from the full URL"""
-      if not self.video_url:
-         return None
-      parsed_url = urlparse(self.video_url)
-      if parsed_url.hostname in ["www.youtube.com", "youtube.com"]:
-         return parse_qs(parsed_url.query).get("v", [None])[0]
-      elif parsed_url.hostname == "youtu.be":
-         return parsed_url.path[1:]
-      return None
+       """Extracts YouTube video ID from any valid YouTube URL"""
+       if not self.video_url:
+           return None
+
+       parsed_url = urlparse(self.video_url)
+       hostname = parsed_url.hostname or ""
+
+       # Standard YouTube URLs
+       if hostname in ["www.youtube.com", "youtube.com", "m.youtube.com"]:
+           query = parse_qs(parsed_url.query)
+           video_id = query.get("v", [None])[0]
+
+           # Handle Shorts URLs
+           if not video_id:
+               path_parts = parsed_url.path.strip("/").split("/")
+               if "shorts" in path_parts:
+                   idx = path_parts.index("shorts")
+                   if len(path_parts) > idx + 1:
+                       video_id = path_parts[idx + 1]
+
+           return video_id
+
+       # Short URLs
+       if hostname in ["youtu.be", "www.youtu.be"]:
+           return parsed_url.path.strip("/")
+
+       return None
+
 
    def get_embed_url(self):
       """Returns the full YouTube embed URL"""

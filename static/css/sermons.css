@@ -63,7 +63,7 @@ body {
 }
 
 /* Wrapper keeps video responsive and consistent with grid */
-.live-video-wrapper {
+.live-video-wrapper, .live-header {
     position: relative;
     width: 100%;
     padding-top: 56.25%; /* 16:9 */
@@ -72,7 +72,7 @@ body {
     overflow: hidden;
 }
 
-.live-video-wrapper iframe {
+.live-video-wrapper iframe, .live-header iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -90,7 +90,7 @@ body {
         font-size: 1.2rem;
     }
 
-    .live-video-wrapper {
+    .live-video-wrapper, .live-header {
         padding-top: 60%; /* slightly taller for mobile */
     }
 }
@@ -233,7 +233,7 @@ body {
     gap: 4px;
 }
 
-.sermon-title {
+.sermon-title, .live-sermon-title {
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.4;
@@ -254,7 +254,7 @@ body {
 }
 
 /* Watch Full Sermon Button */
-.watch-full-btn {
+.watch-full-btn, .live-youtube-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -270,7 +270,7 @@ body {
     transition: background 0.2s;
 }
 
-.watch-full-btn:hover {
+.watch-full-btn:hover, .live-youtube-btn:hover {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
